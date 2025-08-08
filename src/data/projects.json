@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Project Alpha",
+    "description": "A polished project showcasing complex UI and data handling.",
+    "link": "https://example.com/alpha"
+  },
+  {
+    "title": "Project Beta",
+    "description": "A performant SPA with delightful micro-interactions.",
+    "link": "https://example.com/beta"
+  },
+  {
+    "title": "Project Gamma",
+    "description": "An accessible and responsive web experience.",
+    "link": "https://example.com/gamma"
+  }
+]

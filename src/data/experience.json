@@ -1,0 +1,16 @@
+[
+  {
+    "company": "Company One",
+    "role": "Frontend Developer",
+    "period": "2023 - Present",
+    "summary": "Working on modern React applications with a focus on performance and UX.",
+    "technologies": ["React", "TypeScript", "MUI"]
+  },
+  {
+    "company": "Startup Two",
+    "role": "Intern Developer",
+    "period": "2022 - 2023",
+    "summary": "Built features and fixed bugs across the stack.",
+    "technologies": ["Node.js", "Express", "PostgreSQL"]
+  }
+]

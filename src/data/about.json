@@ -1,0 +1,16 @@
+{
+  "story": "Write a concise personal story that highlights your passion and background.",
+  "skills": [
+    "TypeScript",
+    "React",
+    "Node.js",
+    "MUI",
+    "GSAP"
+  ],
+  "timeline": [
+    {
+      "year": "2023",
+      "event": "Started freelancing and building modern web apps"
+    }
+  ]
+}

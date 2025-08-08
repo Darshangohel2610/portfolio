@@ -1,0 +1,9 @@
+{
+  "email": "you@example.com",
+  "socials": [
+    { "platform": "GitHub", "url": "https://github.com/yourhandle" },
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/yourhandle" },
+    { "platform": "Twitter", "url": "https://twitter.com/yourhandle" }
+  ],
+  "signoff": "Thanks for stopping by — let's build something great!"
+}
