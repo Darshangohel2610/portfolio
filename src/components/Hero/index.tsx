@@ -5,7 +5,8 @@ import gsap from "gsap";
 import hero from "../../data/hero.json";
 import { shouldReduceMotion } from "../../utils/motion";
 import ShinyText from "../animated_components/components/ShinyText";
-import "./Hero.css"
+import "./Hero.css";
+import Crosshair from "../animated_components/components/Crosshair";
 type HeroData = {
   name: string;
   tagline: string;
@@ -17,6 +18,7 @@ const data = hero as HeroData;
 
 export default function Hero() {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     if (!rootRef.current) return;
@@ -69,10 +71,19 @@ export default function Hero() {
       component="header"
       role="banner"
       aria-labelledby="hero-heading"
-      sx={{ minHeight: "100svh", display: "flex", alignItems: "center" }}
+      sx={{
+        minHeight: "100svh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+      }}
     >
+      <Box ref={containerRef} style={{ height: "300px", overflow: "hidden" }}>
+        <Crosshair containerRef={rootRef} color="#ffffff" /> 
+      </Box>
       <Container maxWidth="lg">
-        <Stack spacing={{ xs: 2, sm: 2.5, md: 3 }}>
+        <Stack spacing={{ xs: 2, sm: 2.5, md: 3 }} alignItems="center">
           <Typography
             id="hero-heading"
             className="hero-name"
@@ -88,7 +99,7 @@ export default function Hero() {
               },
             }}
           >
-            {data.name}
+            Hey, I'm {data.name}
           </Typography>
 
           <Typography
@@ -112,21 +123,40 @@ export default function Hero() {
             {data.intro}
           </Typography>
 
-          <Box className="hero-cta">
-            <Button
-              variant="contained"
-              size="large"
-              color="secondary"
-              onClick={onCtaClick}
-              aria-label={data.cta}
+          <Box className="hero-cta" sx={{ width: "100%" }}>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
             >
-              <ShinyText
-                text={`${data.cta}`}
-                disabled={false}
-                speed={3}
-                className="custom-class"
-              />{" "}
-            </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="large"
+                component="a"
+                href="/resume.pdf"
+                download
+                aria-label="Download Resume PDF"
+              >
+                Download Resume
+              </Button>
+
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                onClick={onCtaClick}
+                aria-label={data.cta}
+              >
+                <ShinyText
+                  text={`${data.cta}`}
+                  disabled={false}
+                  speed={3}
+                  className="custom-class"
+                />{" "}
+              </Button>
+            </Stack>
           </Box>
         </Stack>
       </Container>

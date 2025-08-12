@@ -3,6 +3,11 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
+import WaterIcon from '@mui/icons-material/Water'
+import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory'
+import EngineeringIcon from '@mui/icons-material/Engineering'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import footer from '../../data/footer.json'
 
 type FooterData = {
@@ -11,9 +16,20 @@ type FooterData = {
   socials?: { platform: string; url: string }[]
   email?: string
   signoff?: string
+  tech?: { prefix: string; label: string; url: string; kind: string }[]
 }
 
 const data = footer as FooterData
+
+function techIcon(kind: string) {
+  const k = kind.toLowerCase()
+  if (k.includes('react')) return <EngineeringIcon fontSize="small" />
+  if (k.includes('mui')) return <AutoAwesomeIcon fontSize="small" />
+  if (k.includes('vercel')) return <ChangeHistoryIcon fontSize="small" />
+  if (k.includes('astro')) return <RocketLaunchIcon fontSize="small" />
+  if (k.includes('tailwind')) return <WaterIcon fontSize="small" />
+  return <ChangeHistoryIcon fontSize="small" />
+}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -43,7 +59,7 @@ export default function Footer() {
           {data.email && (
             <Stack direction="row" spacing={1.5} alignItems="center">
               <AlternateEmailIcon color="action" />
-              <Link href={`mailto:${data.email}`} underline="hover" fontWeight={600}>
+              <Link href={`https://mail.google.com/mail/u/0/?fs=1&to=${data.email}.com&su=Hey+Darshan!&tf=cm`} underline="hover" fontWeight={600}>
                 {data.email}
               </Link>
             </Stack>
@@ -52,6 +68,21 @@ export default function Footer() {
             <Typography variant="body1" color="text.secondary">
               {data.signoff}
             </Typography>
+          )}
+          {data.tech && data.tech.length > 0 && (
+            <Stack direction="row" spacing={2} flexWrap="wrap" justifyContent="center" rowGap={1}>
+              {data.tech.map((t) => (
+                <Stack key={t.label} direction="row" spacing={1} alignItems="center">
+                  <Typography variant="caption" color="text.secondary">
+                    {t.prefix}
+                  </Typography>
+                  <Link href={t.url} target="_blank" rel="noopener noreferrer" underline="hover" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+                    {techIcon(t.kind)}
+                    <Typography variant="caption" fontWeight={700}>{t.label}</Typography>
+                  </Link>
+                </Stack>
+              ))}
+            </Stack>
           )}
           <Typography variant="body2" color="text.secondary">
             © {displayYear} {data.name}

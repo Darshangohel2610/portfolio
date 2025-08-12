@@ -1,5 +1,4 @@
-import { Box, Button, Container, IconButton, Link, Stack, TextField, Tooltip, Typography } from '@mui/material'
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import { Box, Button, Container, IconButton, Link, Stack, TextField, Tooltip, Typography, Alert } from '@mui/material'
 import { useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -30,6 +29,7 @@ export default function Contact() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   useLayoutEffect(() => {
     if (!rootRef.current) return
@@ -47,11 +47,34 @@ export default function Contact() {
     return () => ctx.revert()
   }, [])
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!footerInfo.email) return
-    const mailto = `mailto:${footerInfo.email}?subject=${encodeURIComponent('Portfolio Contact from ' + name)}&body=${encodeURIComponent(message + '\n\nFrom: ' + name + ' <' + email + '>')}`
-    window.location.href = mailto
+    setStatus('loading')
+    try {
+      const response = await fetch("https://getform.io/f/bwnyngqa", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, message })
+      })
+
+      let json: any = null
+      try { json = await response.json() } catch { /* not JSON, ignore */ }
+
+      const ok = response.ok && (json == null ? true : (json?.success === true || json?.success === 'true' || json?.status === 'success'))
+      if (ok) {
+        setStatus('success')
+        setName('')
+        setEmail('')
+        setMessage('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -66,6 +89,23 @@ export default function Contact() {
               <Typography variant="h4" fontWeight={700} sx={{ maxWidth: 700 }}>
                 {data.friendlyMessage}
               </Typography>
+              <Box aria-live="polite">
+                {status === 'success' && (
+                  <Alert severity="success" onClose={() => setStatus('idle')} role="status">
+                    Thank you for submitting your response!
+                  </Alert>
+                )}
+                {status === 'error' && (
+                  <Alert severity="error" onClose={() => setStatus('idle')} role="alert">
+                    Something went wrong. Please contact me at{' '}
+                    {footerInfo.email ? (
+                      <Link href={`mailto:${footerInfo.email}`}>{footerInfo.email}</Link>
+                    ) : (
+                      'my email.'
+                    )}
+                  </Alert>
+                )}
+              </Box>
             </Stack>
 
             <Box className="contact-col" component="form" onSubmit={onSubmit} sx={{ flex: 1 }}>
@@ -98,8 +138,8 @@ export default function Contact() {
                   required
                 />
                 <Stack direction="row" justifyContent="flex-end">
-                  <Button type="submit" variant='outlined' color="primary" fullWidth size="large" aria-label={data.form?.submitText}>
-                    {data.form?.submitText}
+                  <Button type="submit" variant='outlined' color="primary" fullWidth size="large" aria-label={data.form?.submitText} disabled={status === 'loading'}>
+                    {status === 'loading' ? 'Sending…' : data.form?.submitText}
                   </Button>
                 </Stack>
               </Stack>

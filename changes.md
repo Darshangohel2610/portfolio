@@ -1,35 +1,26 @@
 # Portfolio Changes
+# Hero Section Changes
 
-## Sections to Update
+## Layout
+- Center all hero content vertically and horizontally within the viewport.
+- Use a flexbox or grid layout to ensure everything stays centered on all screen sizes.
+- Add enough spacing between the heading, subheading, and buttons.
 
-### Contact Section
-- Divide into two responsive columns using MUI `Grid` or `Stack` (stack vertically on mobile).
-- **Left Column:**
-  - Heading
-  - Friendly message:
-    > Feel free to reach out if you have any questions, ideas, or just want to say hello.
-- **Right Column:**
-  - Contact form with:
-    - Name (TextField)
-    - Email (TextField)
-    - Message (Multiline TextField)
-    - Submit button
+## Content
+- Main heading: Big, bold, modern typography for introduction text.
+- Subheading: Smaller text underneath that briefly describes skills and style.
+- Buttons:
+  - Button 1: "Download Resume" — solid primary style.
+  - Button 2: Existing call-to-action button (e.g., "View Work") — outlined style.
+- Buttons should sit side-by-side with consistent spacing, stacking on smaller screens.
 
-### Footer Section
-- Move all social icons + links here (GitHub, LinkedIn, Twitter, etc.).
-- Center icons horizontally.
-- Below icons, display:
-  - Your name
-  - Current © year
+## Styling
+  - Large headline font size and weight.
+  - Center-aligned text.
+  - Responsive design so it looks balanced on desktop and mobile.
+- Ensure the hero background stays consistent with current theme/background.
+- Use theme colors for buttons and typography.
 
-## Portfolio Structure Reminder
-Keep the vertical scroll flow as:
-1. Hero
-2. About Me
-3. My Work (Experience + Projects + Testimonials)
-4. Contact (updated layout as above)
-5. Footer (updated layout as above)
-
-## Styling Notes
-- Maintain MUI styling consistency with the rest of the portfolio.
-- Ensure responsive behavior for all sections.
+## Extras
+- Make sure the “Download Resume” button downloads a PDF file (resume.pdf in public folder).
+- Keep accessibility in mind — proper contrast, aria-labels if needed.
