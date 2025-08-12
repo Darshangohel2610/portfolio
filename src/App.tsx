@@ -6,8 +6,9 @@ import About from "./components/About";
 import MyWork from "./components/MyWork";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ShinyText from "./components/animated_components/components/ShinyText";
-
+import SplashCursor from "./components/animated_components/components/SplashCursor";
+import { useColorMode } from "./styles/colorMode";
+import LightRays from "./components/animated_components/components/LightRays";
 
 function SectionWrapper({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -28,16 +29,17 @@ function SectionWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const { mode } = useColorMode();
   return (
     <>
+      {/* {mode === "dark" && <SplashCursor></SplashCursor>} */}
+      <LightRays></LightRays>
+      {/* <LightRays raysOrigin="bottom-center"></LightRays> */}
       <Hero />
       <About />
       <MyWork />
       <Contact />
       <Footer />
-      <div>
-        
-      </div>
     </>
   );
 }

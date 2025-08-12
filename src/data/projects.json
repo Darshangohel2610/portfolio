@@ -10,6 +10,16 @@
     "link": "https://example.com/beta"
   },
   {
+    "title": "Project Beta",
+    "description": "A performant SPA with delightful micro-interactions.",
+    "link": "https://example.com/beta"
+  },
+  {
+    "title": "Project Beta",
+    "description": "A performant SPA with delightful micro-interactions.",
+    "link": "https://example.com/beta"
+  },
+  {
     "title": "Project Gamma",
     "description": "An accessible and responsive web experience.",
     "link": "https://example.com/gamma"

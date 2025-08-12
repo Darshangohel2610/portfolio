@@ -1,9 +1,10 @@
 {
-  "email": "you@example.com",
-  "socials": [
-    { "platform": "GitHub", "url": "https://github.com/yourhandle" },
-    { "platform": "LinkedIn", "url": "https://linkedin.com/in/yourhandle" },
-    { "platform": "Twitter", "url": "https://twitter.com/yourhandle" }
-  ],
-  "signoff": "Thanks for stopping by — let's build something great!"
+  "heading": "Contact",
+  "friendlyMessage": "Feel free to reach out if you have any questions, ideas, or just want to say hello.",
+  "form": {
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "submitText": "Send"
+  }
 }

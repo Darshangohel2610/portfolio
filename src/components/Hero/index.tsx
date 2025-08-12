@@ -5,7 +5,7 @@ import gsap from "gsap";
 import hero from "../../data/hero.json";
 import { shouldReduceMotion } from "../../utils/motion";
 import ShinyText from "../animated_components/components/ShinyText";
-
+import "./Hero.css"
 type HeroData = {
   name: string;
   tagline: string;
@@ -116,7 +116,7 @@ export default function Hero() {
             <Button
               variant="contained"
               size="large"
-              
+              color="secondary"
               onClick={onCtaClick}
               aria-label={data.cta}
             >

@@ -1,4 +1,11 @@
 {
   "name": "Darshan Gohel",
-  "year": 2025
+  "year": 2025,
+  "email": "darshangohel32@gmail.com",
+  "signoff": "Thanks for stopping by — let's build something great!",
+  "socials": [
+    { "platform": "GitHub", "url": "https://github.com/yourhandle" },
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/yourhandle" },
+    { "platform": "Twitter", "url": "https://twitter.com/yourhandle" }
+  ]
 }

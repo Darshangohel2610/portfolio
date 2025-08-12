@@ -65,7 +65,7 @@ function ToggleColorModeButton() {
     <IconButton
       onClick={toggleColorMode}
       color="inherit"
-      sx={{ position: 'fixed', bottom: 16, right: 16, bgcolor: 'background.paper', boxShadow: 3 }}
+      sx={{ position: 'fixed', bottom: 16, right: 16, bgcolor: 'background.paper', boxShadow: 3,zIndex:10 }}
       aria-label="toggle color mode"
     >
       {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
