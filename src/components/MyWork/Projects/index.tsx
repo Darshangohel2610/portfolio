@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import projects from '../../../data/projects.json'
 import { shouldReduceMotion } from '../../../utils/motion'
+import footer from '../../../data/footer.json'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,6 +15,11 @@ type Project = {
 }
 
 const items = projects as Project[]
+const githubUrl = (() => {
+  const f: any = footer as any
+  const hit = f?.socials?.find((s: any) => String(s?.kind ?? s?.label ?? '').toLowerCase().includes('github'))
+  return hit?.url || 'https://github.com/Darshangohel2610'
+})()
 
 export default function Projects() {
   const rootRef = useRef<HTMLDivElement | null>(null)
@@ -87,6 +93,20 @@ export default function Projects() {
             </Grid>
           ))}
         </Grid>
+        <Box sx={{ mt: 3 }}>
+          <Button
+            fullWidth
+            variant="outlined"
+            color="primary"
+            component="a"
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="See more projects on GitHub"
+          >
+            to see more...
+          </Button>
+        </Box>
       </Container>
     </Box>
   )

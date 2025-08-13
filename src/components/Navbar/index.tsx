@@ -114,6 +114,7 @@ export default function Navbar() {
                         sx={{
                           width: 8,
                           height: 8,
+                          mb:0.3,
                           borderRadius: '50%',
                           bgcolor: '#00FF6A',
                           boxShadow: '0 0 8px 2px rgba(0,255,106,0.7)',

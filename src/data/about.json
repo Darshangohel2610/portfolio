@@ -1,5 +1,5 @@
 {
-  "story": "Write a concise personal story that highlights your passion and background.",
+  "story": "Just a curious human who turned “what if I code this?” into a daily habit. Now I build web apps that work (most of the time) and break things only to learn how to fix them faster.",
   "skills": [
     "TypeScript",
     "React",
@@ -18,16 +18,20 @@
   ],
   "timeline": [
     {
-      "year": "2023",
-      "event": "Started freelancing and building modern web apps"
-    },
+      "year": "2022",
+    "event": "Began B.Tech in Computer Science & Engineering at L.J. Institute of Engineering and Technology"
+  },
     {
-      "year": "2023",
-      "event": "Started freelancing and building modern web apps"
-    },
-    {
-      "year": "2023",
-      "event": "Started freelancing and building modern web apps"
-    }
+    "year": "2023",
+    "event": "Participated in hackathons and explored new technologies"
+  },
+   {
+    "year": "2024",
+    "event": "Started exploring full-stack development and building small personal projects"
+  },
+ {
+    "year": "2025",
+    "event": "Started journey in the corporate world through internships"
+  }
   ]
 }
