@@ -82,30 +82,9 @@ export function ColorModeProvider({ children }: PropsWithChildren) {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ToggleColorModeButton />
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
 
-function ToggleColorModeButton() {
-  const { mode, toggleColorMode } = useColorMode();
-  return (
-    <IconButton
-      onClick={toggleColorMode}
-      color="inherit"
-      sx={{
-        position: "fixed",
-        bottom: 16,
-        right: 16,
-        bgcolor: "background.paper",
-        boxShadow: 3,
-        zIndex: 10,
-      }}
-      aria-label="toggle color mode"
-    >
-      {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-    </IconButton>
-  );
-}

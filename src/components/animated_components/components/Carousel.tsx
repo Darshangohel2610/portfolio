@@ -1,14 +1,23 @@
-import React from "react";
 import "../css/Carousel.css";
 import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import about from '@/data/about.json'
 import { Paper, Typography } from "@mui/material";
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded'
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded'
-import StorageRoundedIcon from '@mui/icons-material/StorageRounded'
-import LayersRoundedIcon from '@mui/icons-material/LayersRounded'
-import AnimationRoundedIcon from '@mui/icons-material/AnimationRounded'
+import { SiMui } from "react-icons/si";
+import { FaDocker } from "react-icons/fa";
+import { FaGitlab } from "react-icons/fa6";
+import { GiMatterStates } from "react-icons/gi";
+import { FaReact } from "react-icons/fa";
+import { IoLogoNodejs } from "react-icons/io5";
+import { BiLogoMongodb } from "react-icons/bi";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { RiSupabaseFill } from "react-icons/ri";
+import { RiNextjsFill } from "react-icons/ri";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { SiRedux } from "react-icons/si";
+import { SiTypescript } from "react-icons/si";
+
 
 const data = about 
 
@@ -29,10 +38,19 @@ const carousel: KeenSliderPlugin = (slider) => {
 };
 function skillIcon(name: string) {
   const n = name.toLowerCase()
-  if (n.includes('react')) return <AutoAwesomeRoundedIcon />
-  if (n.includes('node')) return <StorageRoundedIcon />
-  if (n.includes('mui') || n.includes('material')) return <LayersRoundedIcon />
-  if (n.includes('gsap')) return <AnimationRoundedIcon />
+  if (n.includes('react')) return <FaReact />
+  if (n.includes('typescript')) return <SiTypescript />
+  if (n.includes('mui') || n.includes('material')) return <SiMui />
+  if (n.includes('mongodb')) return <BiLogoMongodb />
+  if (n.includes('postgresql')) return <BiLogoPostgresql />
+  if (n.includes('supabase')) return <RiSupabaseFill />
+  if (n.includes('next')) return <RiNextjsFill />
+  if (n.includes('express')) return <IoLogoNodejs />
+  if (n.includes('tailwind')) return <RiTailwindCssFill />
+  if (n.includes('zustand')) return <GiMatterStates />
+  if (n.includes('gitlab')) return <FaGitlab />
+  if (n.includes('docker')) return <FaDocker />
+  if (n.includes('redux toolkit')) return <SiRedux />
   return <CodeRoundedIcon />
 }
 export default function Carousel() {

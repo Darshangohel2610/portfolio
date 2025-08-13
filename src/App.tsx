@@ -1,5 +1,5 @@
-import { Box, Container, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { Box,SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -10,6 +10,9 @@ import SplashCursor from "./components/animated_components/components/SplashCurs
 import { useColorMode } from "./styles/colorMode";
 import LightRays from "./components/animated_components/components/LightRays";
 import Navbar from "./components/Navbar";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 function SectionWrapper({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -30,27 +33,70 @@ function SectionWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const { mode } = useColorMode();
+  const { mode, toggleColorMode } = useColorMode();
+  const [cursorOn, setCursorOn] = useState(false);
   const items = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#" },
-  { label: "Contact", href: "#" },
-];
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Contact", href: "#" },
+  ];
   return (
     <>
       <Box id="top" />
       <Navbar />
-      <SplashCursor></SplashCursor>
+      {cursorOn && <SplashCursor />}
       <LightRays></LightRays>
       {/* <LightRays raysOrigin="bottom-center"></LightRays> */}
-      
-      <Box  >
+
+      <Box>
         <Hero />
         <About />
         <MyWork />
         <Contact />
         <Footer />
       </Box>
+
+      <SpeedDial
+        ariaLabel="Quick actions"
+        icon={<SpeedDialIcon />}
+        direction="up"
+        sx={{
+          position: "fixed",
+          bottom: { xs: 12, md: 16 },
+          right: { xs: 12, md: 16 },
+          zIndex: (t) => t.zIndex.appBar + 2,
+          "& .MuiFab-root": {
+        width: { xs: 38, md: 48 },
+        height: { xs: 38, md: 48 },
+          },
+        }}
+        FabProps={{
+          size: "medium",
+        }}
+      >
+        <SpeedDialAction
+          key="toggle-theme"
+          icon={mode === "dark" ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
+          tooltipTitle={mode === "dark" ? "Light mode" : "Dark mode"}
+          onClick={toggleColorMode}
+          sx={{
+        "& .MuiSvgIcon-root": {
+          fontSize: { xs: 20, md: 24 },
+        },
+          }}
+        />
+        <SpeedDialAction
+          key="toggle-cursor"
+          icon={<AutoAwesomeIcon color={cursorOn ? "primary" : undefined} fontSize="small" />}
+          tooltipTitle={cursorOn ? "Disable Splash Cursor" : "Enable Splash Cursor"}
+          onClick={() => setCursorOn((v) => !v)}
+          sx={{
+        "& .MuiSvgIcon-root": {
+          fontSize: { xs: 20, md: 24 },
+        },
+          }}
+        />
+      </SpeedDial>
     </>
   );
 }
