@@ -5,9 +5,21 @@
     "React",
     "Node.js",
     "MUI",
+    "TypeScript",
+    "React",
+    "Node.js",
+    "MUI",
     "GSAP"
   ],
   "timeline": [
+    {
+      "year": "2023",
+      "event": "Started freelancing and building modern web apps"
+    },
+    {
+      "year": "2023",
+      "event": "Started freelancing and building modern web apps"
+    },
     {
       "year": "2023",
       "event": "Started freelancing and building modern web apps"

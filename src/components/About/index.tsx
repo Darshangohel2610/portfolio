@@ -1,75 +1,81 @@
-import { Box, Container, Grid, Paper, Stack, Typography } from '@mui/material'
-import CodeRoundedIcon from '@mui/icons-material/CodeRounded'
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded'
-import StorageRoundedIcon from '@mui/icons-material/StorageRounded'
-import LayersRoundedIcon from '@mui/icons-material/LayersRounded'
-import AnimationRoundedIcon from '@mui/icons-material/AnimationRounded'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import { useLayoutEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import about from '../../data/about.json'
-import { shouldReduceMotion } from '../../utils/motion'
+import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 
-gsap.registerPlugin(ScrollTrigger)
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import about from "../../data/about.json";
+import { shouldReduceMotion } from "../../utils/motion";
+import Carousel from "../animated_components/components/Carousel";
 
-type TimelineItem = { year: string; event: string }
+gsap.registerPlugin(ScrollTrigger);
+
+type TimelineItem = { year: string; event: string };
 
 type AboutData = {
-  story: string
-  skills: string[]
-  timeline?: TimelineItem[]
-}
+  story: string;
+  skills: string[];
+  timeline?: TimelineItem[];
+};
 
-const data = about as AboutData
-
-function skillIcon(name: string) {
-  const n = name.toLowerCase()
-  if (n.includes('react')) return <AutoAwesomeRoundedIcon />
-  if (n.includes('node')) return <StorageRoundedIcon />
-  if (n.includes('mui') || n.includes('material')) return <LayersRoundedIcon />
-  if (n.includes('gsap')) return <AnimationRoundedIcon />
-  return <CodeRoundedIcon />
-}
+const data = about as AboutData;
 
 export default function About() {
-  const rootRef = useRef<HTMLDivElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
-    if (!rootRef.current) return
-    const reduce = shouldReduceMotion()
+    if (!rootRef.current) return;
+    const reduce = shouldReduceMotion();
     const ctx = gsap.context(() => {
-      const elements = gsap.utils.toArray<HTMLElement>('.about-reveal')
+      const elements = gsap.utils.toArray<HTMLElement>(".about-reveal");
       elements.forEach((el, i) => {
-        const from = { autoAlpha: 0, y: 24 }
+        const from = { autoAlpha: 0, y: 24 };
         const to = reduce
           ? { autoAlpha: 1, y: 0, duration: 0 }
           : {
               autoAlpha: 1,
               y: 0,
               duration: 0.7,
-              ease: 'power2.out',
+              ease: "power2.out",
               delay: i * 0.05,
-              scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none reverse' },
-            }
-        gsap.fromTo(el, from, to as any)
-      })
-    }, rootRef)
-    return () => ctx.revert()
-  }, [])
+              scrollTrigger: {
+                trigger: el,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            };
+        gsap.fromTo(el, from, to as any);
+      });
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <Box id="about" ref={rootRef} component="section" aria-labelledby="about-heading" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box
+      id="about"
+      ref={rootRef}
+      component="section"
+      aria-labelledby="about-heading"
+      sx={{ py: { xs: 8, md: 12 } }}
+    >
       <Container maxWidth="lg">
         <Stack spacing={{ xs: 4, md: 6 }}>
           <Stack spacing={1.5} className="about-reveal">
-            <Typography id="about-heading" variant="overline" color="text.secondary">
+            <Typography
+              id="about-heading"
+              variant="overline"
+              color="text.secondary"
+            >
               About Me
             </Typography>
             <Typography variant="h4" fontWeight={700} lineHeight={1.2}>
               A little bit of my story
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '75ch' }}>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ maxWidth: "75ch" }}
+            >
               {data.story}
             </Typography>
           </Stack>
@@ -78,27 +84,16 @@ export default function About() {
             <Typography variant="h6" fontWeight={700} gutterBottom>
               Tech stack
             </Typography>
-            <Grid container spacing={2}>
-              {data.skills?.map((skill) => (
-                <Grid key={skill} item xs={6} sm={4} md={3} lg={2}>
-                  <Paper
-                    variant="outlined"
-                    sx={{
-                      p: 2,
-                      height: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.25,
-                    }}
-                    aria-label={skill}
-                  >
-                    {skillIcon(skill)}
-                    <Typography variant="body2" fontWeight={600}>
-                      {skill}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                mt:3,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Carousel></Carousel>
             </Grid>
           </Box>
 
@@ -107,10 +102,15 @@ export default function About() {
               <Typography variant="h6" fontWeight={700}>
                 Timeline
               </Typography>
-              <Stack spacing={2} sx={{ position: 'relative' }}>
+              <Stack spacing={2} sx={{ position: "relative" }}>
                 {data.timeline.map((item, idx) => (
-                  <Stack key={`${item.year}-${idx}`} direction="row" spacing={2} alignItems="flex-start">
-                    <Box sx={{ pt: 0.5, color: 'primary.main' }}>
+                  <Stack
+                    key={`${item.year}-${idx}`}
+                    direction="row"
+                    spacing={2}
+                    alignItems="flex-start"
+                  >
+                    <Box sx={{ pt: 0.5, color: "primary.main" }}>
                       <FiberManualRecordIcon fontSize="small" />
                     </Box>
                     <Box>
@@ -127,5 +127,5 @@ export default function About() {
         </Stack>
       </Container>
     </Box>
-  )
+  );
 }
