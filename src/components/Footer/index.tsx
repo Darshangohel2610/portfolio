@@ -3,6 +3,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import { SiDailydotdev } from "react-icons/si";
 import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory'
 import { SiMui } from "react-icons/si";
 import { IoLogoVercel } from "react-icons/io5";
@@ -44,8 +45,8 @@ export default function Footer() {
                     <GitHubIcon sx={{fontSize:36}}/>
                   ) : s.platform.toLowerCase().includes('linkedin') ? (
                     <LinkedInIcon sx={{fontSize:36}}/>
-                  ) : s.platform.toLowerCase().includes('twitter') || s.platform.toLowerCase().includes('x') ? (
-                    <TwitterIcon sx={{fontSize:36}}/>
+                  ) : s.platform.toLowerCase().includes('daily dev') || s.platform.toLowerCase().includes('x') ? (
+                    <SiDailydotdev style={{fontSize:36}}/>
                   ) : (
                     <GitHubIcon />
                   )}

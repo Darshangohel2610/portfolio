@@ -135,7 +135,7 @@ export default function Hero() {
                 color="primary"
                 size="large"
                 component="a"
-                href="/resume.pdf"
+                href="/content.pdf"
                 download
                 aria-label="Download Resume PDF"
               >

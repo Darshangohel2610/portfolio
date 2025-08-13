@@ -4,9 +4,9 @@
   "email": "darshangohel32@gmail.com",
   "signoff": "Thanks for stopping by — let's build something great!",
   "socials": [
-    { "platform": "GitHub", "url": "https://github.com/yourhandle" },
-    { "platform": "LinkedIn", "url": "https://linkedin.com/in/yourhandle" },
-    { "platform": "Twitter", "url": "https://twitter.com/yourhandle" }
+    { "platform": "GitHub", "url": "https://github.com/Darshangohel2610" },
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/darshan-gohel-a6a816263" },
+    { "platform": "Daily Dev", "url": "https://app.daily.dev/darshangohel" }
   ],
   "tech": [
     { "prefix": "Built with", "label": "React", "url": "https://react.dev", "kind": "react" },
