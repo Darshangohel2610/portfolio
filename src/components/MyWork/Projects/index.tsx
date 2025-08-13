@@ -50,7 +50,28 @@ export default function Projects() {
         <Grid container spacing={2}>
           {items.map((p, idx) => (
             <Grid key={`${p.title}-${idx}`} item xs={12} sm={6} md={4}>
-              <Card className="project-card" variant="outlined" sx={{ height: '100%' }}>
+              <Card
+                className="project-card"
+                variant="outlined"
+                tabIndex={0}
+                sx={{
+                  height: '100%',
+                  transform: 'translateY(0) scale(1)',
+                  transition: (t) =>
+                    t.transitions.create(['transform', 'box-shadow', 'border-color', 'background-color'], {
+                      duration: 200,
+                      easing: t.transitions.easing.easeOut,
+                    }),
+                  '&:hover, &:focus-visible': {
+                    transform: 'translateY(-4px) scale(1.01)',
+                    boxShadow: 6,
+                    borderColor: 'primary.main',
+                    backgroundColor: (t) =>
+                      t.palette.mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)',
+                  },
+                  outline: 'none',
+                }}
+              >
                 <CardHeader title={p.title} titleTypographyProps={{ fontWeight: 700 }} />
                 <CardContent>
                   <Typography variant="body2" color="text.secondary">

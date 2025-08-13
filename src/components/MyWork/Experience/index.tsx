@@ -53,9 +53,35 @@ export default function Experience() {
         </Stack>
         <Stack spacing={2.5}>
           {items.map((item, idx) => (
-            <Paper key={`${item.company}-${idx}`} className="exp-item" variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
+            <Paper
+              key={`${item.company}-${idx}`}
+              className="exp-item"
+              variant="outlined"
+              tabIndex={0}
+              sx={{
+                p: { xs: 2, md: 3 },
+                transform: 'translateY(0) scale(1)',
+                transition: (t) =>
+                  t.transitions.create(['transform', 'box-shadow', 'border-color', 'background-color'], {
+                    duration: 200,
+                    easing: t.transitions.easing.easeOut,
+                  }),
+                '&:hover, &:focus-visible': {
+                  transform: 'translateY(-4px) scale(1.01)',
+                  boxShadow: 6,
+                  borderColor: 'primary.main',
+                  backgroundColor: (t) => (t.palette.mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)'),
+                },
+                outline: 'none',
+              }}
+            >
               <Stack spacing={1.25}>
-                <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', sm: 'center' }} spacing={1}>
+                <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  justifyContent="space-between"
+                  alignItems={{ xs: 'flex-start', sm: 'center' }}
+                  spacing={1}
+                >
                   <Typography variant="h6" fontWeight={700}>
                     {item.role} · {item.company}
                   </Typography>

@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import { PiCat } from "react-icons/pi";
 
 function SectionWrapper({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -54,7 +55,7 @@ export default function App() {
 
       <SpeedDial
         ariaLabel="Quick actions"
-        icon={<SpeedDialIcon />}
+        icon={<PiCat size={30}/>}
         direction="up"
         sx={{
           position: "fixed",

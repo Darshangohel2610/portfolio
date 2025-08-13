@@ -18,7 +18,6 @@ import { RiTailwindCssFill } from "react-icons/ri";
 import { SiRedux } from "react-icons/si";
 import { SiTypescript } from "react-icons/si";
 
-
 const data = about 
 
 const carousel: KeenSliderPlugin = (slider) => {
@@ -68,8 +67,9 @@ export default function Carousel() {
     <div className="wrapper">
       <div className="scene">
         <div className="carousel keen-slider" ref={sliderRef}>
-          {data.skills?.map((skill) => (
+          {data.skills?.map((skill,_id) => (
                   <Paper
+                    key={_id}
                     variant="outlined"
                     sx={{
                       p: 2,
