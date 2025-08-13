@@ -35,11 +35,7 @@ function SectionWrapper({ children }: { children: React.ReactNode }) {
 export default function App() {
   const { mode, toggleColorMode } = useColorMode();
   const [cursorOn, setCursorOn] = useState(false);
-  const items = [
-    { label: "Home", href: "#" },
-    { label: "About", href: "#" },
-    { label: "Contact", href: "#" },
-  ];
+
   return (
     <>
       <Box id="top" />
