@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import SplashCursor from "./components/animated_components/components/SplashCursor";
 import { useColorMode } from "./styles/colorMode";
 import LightRays from "./components/animated_components/components/LightRays";
+import Navbar from "./components/Navbar";
 
 function SectionWrapper({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -30,16 +31,26 @@ function SectionWrapper({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const { mode } = useColorMode();
+  const items = [
+  { label: "Home", href: "#" },
+  { label: "About", href: "#" },
+  { label: "Contact", href: "#" },
+];
   return (
     <>
-      {/* {mode === "dark" && <SplashCursor></SplashCursor>} */}
+      <Box id="top" />
+      <Navbar />
+      <SplashCursor></SplashCursor>
       <LightRays></LightRays>
       {/* <LightRays raysOrigin="bottom-center"></LightRays> */}
-      <Hero />
-      <About />
-      <MyWork />
-      <Contact />
-      <Footer />
+      
+      <Box  >
+        <Hero />
+        <About />
+        <MyWork />
+        <Contact />
+        <Footer />
+      </Box>
     </>
   );
 }

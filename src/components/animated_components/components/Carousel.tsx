@@ -13,7 +13,7 @@ import AnimationRoundedIcon from '@mui/icons-material/AnimationRounded'
 const data = about 
 
 const carousel: KeenSliderPlugin = (slider) => {
-  const z = 300;
+  const z = 370;
   function rotate() {
     const deg = 360 * slider.track.details.progress;
     slider.container.style.transform = `translateZ(-${z}px) rotateY(${-deg}deg)`;
@@ -58,12 +58,22 @@ export default function Carousel() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 1.25,
+                      
                     }}
                     className="carousel__cell"
                     aria-label={skill}
                   >
                     {skillIcon(skill)}
-                    <Typography variant="body2" fontWeight={600}>
+                    <Typography
+                      variant="body2"
+                      fontWeight={600}
+                      sx={{
+                        fontSize: {
+                          xs: '0.65rem', 
+                          sm: '1rem',    // default on small and up
+                        },
+                      }}
+                    >
                       {skill}
                     </Typography>
                   </Paper>

@@ -5,11 +5,17 @@
     "React",
     "Node.js",
     "MUI",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "MUI",
-    "GSAP"
+    "MongoDB",
+    "PostgreSQL",
+    "Supabase",
+    "Next",
+    "Express",
+    "Tailwind",
+    "Redux Toolkit",
+    "Zustand",
+    "GitLab",
+    "Docker",
+    "AWS"
   ],
   "timeline": [
     {
