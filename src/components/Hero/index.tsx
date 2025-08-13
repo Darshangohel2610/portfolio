@@ -135,7 +135,7 @@ export default function Hero() {
                 color="primary"
                 size="large"
                 component="a"
-                href="/content.pdf"
+                href="/Darshan_Gohel_resume.pdf"
                 download
                 aria-label="Download Resume PDF"
               >
