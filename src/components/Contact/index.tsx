@@ -47,24 +47,21 @@ export default function Contact() {
     return () => ctx.revert()
   }, [])
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setStatus('loading')
     try {
-      const response = await fetch("https://getform.io/f/bwnyngqa", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, message })
+      const form = e.currentTarget
+      const formData = new FormData(form)
+      // Netlify requires a form-name field
+      formData.set('form-name', 'contact')
+      // Post to current path for Netlify
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString(),
       })
-
-      let json: any = null
-      try { json = await response.json() } catch { /* not JSON, ignore */ }
-
-      const ok = response.ok && (json == null ? true : (json?.success === true || json?.success === 'true' || json?.status === 'success'))
-      if (ok) {
+      if (response.ok) {
         setStatus('success')
         setName('')
         setEmail('')
@@ -108,9 +105,22 @@ export default function Contact() {
               </Box>
             </Stack>
 
-            <Box className="contact-col" component="form" onSubmit={onSubmit} sx={{ flex: 1 }}>
+            <Box
+              className="contact-col"
+              component="form"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={onSubmit}
+              sx={{ flex: 1 }}
+            >
+              {/* Netlify hidden inputs */}
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="text" name="bot-field" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
               <Stack spacing={2}>
                 <TextField
+                  name="name"
                   label={data.form?.nameLabel}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -119,6 +129,7 @@ export default function Contact() {
                   required
                 />
                 <TextField
+                  name="email"
                   type="email"
                   label={data.form?.emailLabel}
                   size='medium'
@@ -128,6 +139,7 @@ export default function Contact() {
                   required
                 />
                 <TextField
+                  name="message"
                   label={data.form?.messageLabel}
                   value={message}
                   size='medium'
