@@ -11,6 +11,7 @@ const tabs = [
 export default function Navbar() {
   const barRef = useRef<HTMLDivElement | null>(null)
   const [value, setValue] = useState(0)
+  const [isManualScrolling, setIsManualScrolling] = useState(false)
 
   // Determine active tab by hash
   const activeIndex = useMemo(() => {
@@ -29,12 +30,63 @@ export default function Navbar() {
     return () => ctx.revert()
   }, [])
 
+  // Update active tab on manual scroll
+  useEffect(() => {
+    const links = tabs.map(t => t.href)
+    const getTop = (hash: string) => {
+      if (hash === '#top') return 0
+      const el = document.querySelector(hash) as HTMLElement | null
+      if (!el) return Number.POSITIVE_INFINITY
+      return el.getBoundingClientRect().top + window.scrollY
+    }
+    let ticking = false
+    const update = () => {
+      ticking = false
+      if (isManualScrolling) return // skip while smooth scroll in progress
+
+      const threshold = window.innerHeight * 0.35
+      const y = window.scrollY + threshold
+      const workTop = getTop('#work')
+      const contactTop = getTop('#contact')
+      let idx = 0
+      if (y >= contactTop) idx = 2
+      else if (y >= workTop) idx = 1
+      else idx = 0
+      setValue(prev => {
+        if (prev !== idx) {
+          const href = links[idx]
+          try { history.replaceState(null, '', href) } catch {}
+        }
+        return idx
+      })
+    }
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    // initialize
+    update()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [isManualScrolling])
+
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
     const href = tabs[newValue].href
     const el = document.querySelector(href === '#top' ? 'body' : href)
+
+    // disable scroll listener temporarily
+    setIsManualScrolling(true)
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     history.replaceState(null, '', href)
+
+    // re-enable after smooth scroll duration (~800ms)
+    setTimeout(() => setIsManualScrolling(false), 800)
   }
 
   return (
@@ -113,7 +165,7 @@ export default function Navbar() {
                         sx={{
                           width: 8,
                           height: 8,
-                          mb:0.3,
+                          mb: 0.3,
                           borderRadius: '50%',
                           bgcolor: '#00FF6A',
                           boxShadow: '0 0 8px 2px rgba(0,255,106,0.7)',
