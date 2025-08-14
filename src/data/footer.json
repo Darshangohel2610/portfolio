@@ -26,9 +26,9 @@
     },
     {
       "prefix": "Deployed on",
-      "label": "Vercel",
-      "url": "https://vercel.com",
-      "kind": "vercel"
+      "label": "Netlify",
+      "url": "https://app.netlify.com",
+      "kind": "netlify"
     }
   ]
 }

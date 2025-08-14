@@ -6,7 +6,7 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { SiDailydotdev } from "react-icons/si";
 import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory'
 import { SiMui } from "react-icons/si";
-import { IoLogoVercel } from "react-icons/io5";
+import { SiNetlify } from "react-icons/si";
 import footer from '../../data/footer.json'
 import { FaReact } from "react-icons/fa";
 
@@ -25,7 +25,7 @@ function techIcon(kind: string) {
   const k = kind.toLowerCase()
   if (k.includes('react')) return <FaReact fontSize="small" />
   if (k.includes('mui')) return <SiMui fontSize="small" />
-  if (k.includes('vercel')) return <IoLogoVercel fontSize="small" />
+  if (k.includes('netlify')) return <SiNetlify fontSize="small" />
   return <ChangeHistoryIcon fontSize="small" />
 }
 
