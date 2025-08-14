@@ -42,7 +42,6 @@ export default function App() {
       <Box id="top" />
       <Navbar />
       {cursorOn && <SplashCursor />}
-      <LightRays></LightRays>
       {/* <LightRays raysOrigin="bottom-center"></LightRays> */}
 
       <Box>
