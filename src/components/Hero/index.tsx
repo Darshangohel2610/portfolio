@@ -149,20 +149,25 @@ export default function Hero() {
                 Download Resume
               </Button>
 
-              <Button
+                <Button
                 variant="contained"
                 size="large"
-                color="primary"
+                sx={{
+                  bgcolor: "#1565c0", // darker shade of blue
+                  "&:hover": {
+                  bgcolor: "#0d47a1", // even darker on hover
+                  },
+                }}
                 onClick={onCtaClick}
                 aria-label={data.cta}
-              >
+                >
                 <ShinyText
                   text={`${data.cta}`}
                   disabled={false}
                   speed={3}
                   className="custom-class"
                 />{" "}
-              </Button>
+                </Button>
             </Stack>
           </Box>
         </Stack>

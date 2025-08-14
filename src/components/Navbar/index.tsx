@@ -49,7 +49,6 @@ export default function Navbar() {
         right: 0,
         display: 'flex',
         alignItems: 'center',
-        pointerEvents: 'none',
         border: 'none',
         zIndex: (t) => t.zIndex.appBar + 1,
       }}
