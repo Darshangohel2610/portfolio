@@ -75,14 +75,14 @@ export default function Testimonials() {
         {items.length > 0 ? (
           <PixelTransition
             firstContent={
-                <Typography
+              <Typography
                 variant="h1"
                 fontWeight={700}
                 color={`${mode !== "dark" ? "#222" : "#f5f5f5"}`}
                 align="center"
-                >
+              >
                 “...”
-                </Typography>
+              </Typography>
             }
             secondContent={
               <Box
@@ -108,7 +108,7 @@ export default function Testimonials() {
                   }}
                 >
                   Testimonials coming soon. Yours could be the first — let’s
-                  create something worth raving about.
+                  make something rave-worthy.
                 </Typography>
               </Box>
             }
