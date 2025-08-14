@@ -1,27 +1,32 @@
 [
   {
-    "title": "Project Alpha",
-    "description": "A polished project showcasing complex UI and data handling.",
-    "link": "https://example.com/alpha"
+    "title": "Habit-Builder (In-Progress)",
+    "description": "Habit tracker app built with Next.js, TypeScript, MUI, Supabase and PWA. Features streaks, progress, and offline access.",
+    "link": "https://github.com/Darshangohel2610/Habit-Builder"
   },
   {
-    "title": "Project Beta",
-    "description": "A performant SPA with delightful micro-interactions.",
-    "link": "https://example.com/beta"
+    "title": "Company Landing Page",
+    "description": "A cloned company landing page featuring modern design and responsive layout.",
+    "link": "https://github.com/Darshangohel2610/Tecoreng_Clone"
   },
   {
-    "title": "Project Beta",
-    "description": "A performant SPA with delightful micro-interactions.",
-    "link": "https://example.com/beta"
+    "title": "User Management Portal",
+    "description": "React User Management Portal with CRUD, validation, and delete confirmation.",
+    "link": "https://github.com/Darshangohel2610/fullstack-usermanagement"
+  },
+    {
+    "title": "Apna Living",
+    "description": "PG finding website frontend design. An accessible and responsive web experience.",
+    "link": "https://github.com/Darshangohel2610/apnaliving.github.io/tree/main/pg-2"
   },
   {
-    "title": "Project Beta",
-    "description": "A performant SPA with delightful micro-interactions.",
-    "link": "https://example.com/beta"
+    "title": "Portfolio",
+    "description": "Responsive site built with React, TypeScript, MUI, and GSAP to showcase skills, projects, and achievements with a modern UI.",
+    "link": "https://github.com/Darshangohel2610/portfolio"
   },
   {
-    "title": "Project Gamma",
-    "description": "An accessible and responsive web experience.",
-    "link": "https://example.com/gamma"
+    "title": "Dev Playground",
+    "description": "A GitHub repository where I practice coding, experiment with new libraries, and try out small ideas before using them in real projects",
+    "link": "https://github.com/Darshangohel2610/some-random-codes"
   }
 ]

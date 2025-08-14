@@ -3,12 +3,12 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import WaterIcon from '@mui/icons-material/Water'
+import { SiDailydotdev } from "react-icons/si";
 import ChangeHistoryIcon from '@mui/icons-material/ChangeHistory'
-import EngineeringIcon from '@mui/icons-material/Engineering'
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import { SiMui } from "react-icons/si";
+import { IoLogoVercel } from "react-icons/io5";
 import footer from '../../data/footer.json'
+import { FaReact } from "react-icons/fa";
 
 type FooterData = {
   name: string
@@ -23,11 +23,9 @@ const data = footer as FooterData
 
 function techIcon(kind: string) {
   const k = kind.toLowerCase()
-  if (k.includes('react')) return <EngineeringIcon fontSize="small" />
-  if (k.includes('mui')) return <AutoAwesomeIcon fontSize="small" />
-  if (k.includes('vercel')) return <ChangeHistoryIcon fontSize="small" />
-  if (k.includes('astro')) return <RocketLaunchIcon fontSize="small" />
-  if (k.includes('tailwind')) return <WaterIcon fontSize="small" />
+  if (k.includes('react')) return <FaReact fontSize="small" />
+  if (k.includes('mui')) return <SiMui fontSize="small" />
+  if (k.includes('vercel')) return <IoLogoVercel fontSize="small" />
   return <ChangeHistoryIcon fontSize="small" />
 }
 
@@ -47,8 +45,8 @@ export default function Footer() {
                     <GitHubIcon sx={{fontSize:36}}/>
                   ) : s.platform.toLowerCase().includes('linkedin') ? (
                     <LinkedInIcon sx={{fontSize:36}}/>
-                  ) : s.platform.toLowerCase().includes('twitter') || s.platform.toLowerCase().includes('x') ? (
-                    <TwitterIcon sx={{fontSize:36}}/>
+                  ) : s.platform.toLowerCase().includes('daily dev') || s.platform.toLowerCase().includes('x') ? (
+                    <SiDailydotdev style={{fontSize:36}}/>
                   ) : (
                     <GitHubIcon />
                   )}

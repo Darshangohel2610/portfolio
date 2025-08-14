@@ -7,6 +7,8 @@ import { shouldReduceMotion } from "../../utils/motion";
 import ShinyText from "../animated_components/components/ShinyText";
 import "./Hero.css";
 import Crosshair from "../animated_components/components/Crosshair";
+import { useColorMode } from "@/styles/colorMode";
+import LightRays from "../animated_components/components/LightRays";
 type HeroData = {
   name: string;
   tagline: string;
@@ -19,7 +21,7 @@ const data = hero as HeroData;
 export default function Hero() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-
+  const {mode} = useColorMode();
   useLayoutEffect(() => {
     if (!rootRef.current) return;
     const reduce = shouldReduceMotion();
@@ -79,8 +81,13 @@ export default function Hero() {
         textAlign: "center",
       }}
     >
+      <LightRays></LightRays>
+
       <Box ref={containerRef} style={{ height: "300px", overflow: "hidden" }}>
-        <Crosshair containerRef={rootRef} color="#ffffff" /> 
+        <Crosshair
+          containerRef={rootRef}
+          color={mode === "dark" ? "#ffffff" : "#222222"}
+        />
       </Box>
       <Container maxWidth="lg">
         <Stack spacing={{ xs: 2, sm: 2.5, md: 3 }} alignItems="center">
@@ -135,7 +142,7 @@ export default function Hero() {
                 color="primary"
                 size="large"
                 component="a"
-                href="/resume.pdf"
+                href="/Darshan_Gohel_resume.pdf"
                 download
                 aria-label="Download Resume PDF"
               >

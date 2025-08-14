@@ -80,7 +80,7 @@ export default function About() {
             </Typography>
           </Stack>
 
-          <Box className="about-reveal">
+          <Box className="about-reveal" sx={{overflow:"hidden"}}>
             <Typography variant="h6" fontWeight={700} gutterBottom>
               Tech stack
             </Typography>

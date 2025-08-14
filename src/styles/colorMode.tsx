@@ -4,6 +4,7 @@ import {
   ThemeProvider,
   createTheme,
   useMediaQuery,
+  GlobalStyles,
 } from "@mui/material";
 import {
   useMemo,
@@ -12,8 +13,7 @@ import {
   useContext,
   PropsWithChildren,
 } from "react";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { alpha } from "@mui/material/styles";
 
 interface ColorModeContextValue {
   mode: "light" | "dark";
@@ -82,30 +82,47 @@ export function ColorModeProvider({ children }: PropsWithChildren) {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ToggleColorModeButton />
+        <GlobalStyles
+          styles={(t) => ({
+            html: { scrollBehavior: "smooth" },
+            body: { scrollbarGutter: "stable" },
+            "*, *::before, *::after": {
+              /* Firefox */
+              scrollbarWidth: "thin",
+              scrollbarColor: `${alpha(t.palette.primary.main, 0.7)} ${
+                t.palette.mode === "dark" ? "#2a2a2a" : "#e9e9e9"
+              }`,
+            },
+            /* WebKit */
+            "::-webkit-scrollbar": {
+              width: 10,
+              height: 10,
+            },
+            "::-webkit-scrollbar-track": {
+              backgroundColor:
+                t.palette.mode === "dark"
+                  ? "rgba(255,255,255,0.06)"
+                  : "rgba(0,0,0,0.05)",
+              borderRadius: 999,
+            },
+            "::-webkit-scrollbar-thumb": {
+              backgroundColor: alpha(t.palette.primary.main, 0.65),
+              borderRadius: 999,
+              border: `2px solid ${
+                t.palette.mode === "dark" ? "rgba(20,20,22,0.9)" : "#fff"
+              }`,
+            },
+            "::-webkit-scrollbar-thumb:hover": {
+              backgroundColor: alpha(t.palette.primary.main, 0.85),
+            },
+            "::-webkit-scrollbar-button": {
+              display: "none"
+            },
+            "::-webkit-scrollbar-corner": { backgroundColor: "transparent" },
+          })}
+        />
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>
-  );
-}
-
-function ToggleColorModeButton() {
-  const { mode, toggleColorMode } = useColorMode();
-  return (
-    <IconButton
-      onClick={toggleColorMode}
-      color="inherit"
-      sx={{
-        position: "fixed",
-        bottom: 16,
-        right: 16,
-        bgcolor: "background.paper",
-        boxShadow: 3,
-        zIndex: 10,
-      }}
-      aria-label="toggle color mode"
-    >
-      {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-    </IconButton>
   );
 }
