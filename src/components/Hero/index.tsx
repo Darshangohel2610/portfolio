@@ -141,8 +141,9 @@ export default function Hero() {
                 variant="outlined"
                 color="primary"
                 size="large"
+                target="_blank"
                 component="a"
-                href="/Darshan_Gohel_resume.pdf"
+                href="https://drive.google.com/file/d/1DsZV8H8vy7SfcNYNWtO9pvPTPOMS8CtK/view?usp=sharing"
                 download
                 aria-label="Download Resume PDF"
               >

@@ -34,7 +34,7 @@ export function useColorMode() {
 export function ColorModeProvider({ children }: PropsWithChildren) {
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
   const [mode, setMode] = useState<"light" | "dark">(
-    prefersDark ? "dark" : "light"
+     "dark"
   );
 
   const colorMode = useMemo(
