@@ -143,7 +143,7 @@ export default function Hero() {
                 size="large"
                 target="_blank"
                 component="a"
-                href="https://drive.google.com/file/d/1DsZV8H8vy7SfcNYNWtO9pvPTPOMS8CtK/view?usp=sharing"
+                href="https://drive.google.com/file/d/1dbe2aC0YBwcV17Hlkggqw-tW5LrsYXl-/view?usp=sharing"
                 download
                 aria-label="Download Resume PDF"
               >

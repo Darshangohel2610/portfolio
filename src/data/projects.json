@@ -1,32 +1,42 @@
 [
   {
+    "title": "Policy Chatbot UI (Company Project)",
+    "description": "Built UI screens using React, TypeScript, and MUI. Integrated REST APIs and improved user experience for internal chatbot workflows.",
+    "link": ""
+  },
+  {
+    "title": "Task & Ticket Management Platform (Company Project)",
+    "description": "Developed pages, handled API integrations, optimized performance, and contributed to core modules of a Zoho-like management system.",
+    "link": ""
+  },
+  {
+    "title": "Dating App (iOS, Legacy Project)",
+    "description": "Worked on a large React Native codebase, fixed bugs, refactored components, integrated APIs, and improved overall stability for iOS builds.",
+    "link": ""
+  },
+  {
+    "title": "Jewelry E-Commerce Website (Freelance)",
+    "description": "Built responsive frontend UI using React, Tailwind, and GSAP animations. Designed smooth product interactions and mobile-friendly layouts.",
+    "link": ""
+  },
+  {
     "title": "Habit-Builder (In-Progress)",
-    "description": "Habit tracker app built with Next.js, TypeScript, MUI, Supabase and PWA. Features streaks, progress, and offline access.",
+    "description": "PWA-style habit tracker built with Next.js, TypeScript, and MUI. Features streaks, daily tracking, and offline-first functionality.",
     "link": "https://github.com/Darshangohel2610/Habit-Builder"
   },
   {
-    "title": "Company Landing Page",
-    "description": "A cloned company landing page featuring modern design and responsive layout.",
-    "link": "https://github.com/Darshangohel2610/Tecoreng_Clone"
-  },
-  {
-    "title": "User Management Portal",
-    "description": "React User Management Portal with CRUD, validation, and delete confirmation.",
-    "link": "https://github.com/Darshangohel2610/fullstack-usermanagement"
-  },
-    {
-    "title": "Apna Living",
-    "description": "PG finding website frontend design. An accessible and responsive web experience.",
-    "link": "https://github.com/Darshangohel2610/apnaliving.github.io/tree/main/pg-2"
+    "title": "Mood-Based Content Recommender (Cloud-Native, In-Progress)",
+    "description": "Emotion-based recommendation system using AWS Rekognition, Lambda, DynamoDB, and Next.js. Handles mood detection and personalized content suggestions.",
+    "link": ""
   },
   {
     "title": "Portfolio",
-    "description": "Responsive site built with React, TypeScript, MUI, and GSAP to showcase skills, projects, and achievements with a modern UI.",
+    "description": "Personal portfolio built with React, TypeScript, Tailwind, and Framer Motion/GSAP. Showcases projects, animations, and experience with a clean UI.",
     "link": "https://github.com/Darshangohel2610/portfolio"
   },
   {
     "title": "Dev Playground",
-    "description": "A GitHub repository where I practice coding, experiment with new libraries, and try out small ideas before using them in real projects",
+    "description": "A repo of experimental code snippets, small features, and practice projects used to test new libraries, patterns, and UI ideas.",
     "link": "https://github.com/Darshangohel2610/some-random-codes"
   }
 ]
