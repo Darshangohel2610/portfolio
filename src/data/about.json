@@ -1,37 +1,43 @@
 {
-  "story": "Just a curious human who turned ‘what if I code this?’ into a daily habit. Now I build web apps that usually work — and when they don’t, I fix them faster than you can say ‘bug report’.",
+  "story": "I am a Final-year Computer Science student and Software Developer with hands-on experience building production mobile and web applications using React, React Native, and TypeScript. I have contributed to customer-facing platforms, business management systems, and freelance client projects, working on payment integrations, QR workflows, deep linking, OCR-assisted features, and Android release management. What started as 'what if I code this?' has grown into a daily habit of building features in fast-paced product environments.",
   "skills": [
+    "JavaScript",
     "TypeScript",
+    "HTML",
+    "CSS",
+    "Python",
     "React",
-    "MUI",
-    "MongoDB",
-    "PostgreSQL",
     "React Native",
-    "Next",
-    "Express",
-    "Tailwind",
+    "Next.js",
     "Redux Toolkit",
     "Zustand",
+    "Tailwind CSS",
+    "Material UI",
+    "Git",
+    "GitHub",
     "GitLab",
-    "Docker",
-    "AWS"
+    "Postman",
+    "Apidog",
+    "Reactotron",
+    "Node.js",
+    "Express.js"
   ],
   "timeline": [
     {
-      "year": "2022",
-    "event": "Began B.Tech in Computer Science & Engineering at L.J. Institute of Engineering and Technology"
-  },
+      "year": "06/2022 – 06/2026",
+      "event": "B.Tech in Computer Science and Engineering at L.J. University for Engineering and Technology"
+    },
     {
-    "year": "2023",
-    "event": "Participated in hackathons and explored new technologies"
-  },
-   {
-    "year": "2024",
-    "event": "Started exploring full-stack development and building small personal projects"
-  },
- {
-    "year": "2025",
-    "event": "Started journey in the corporate world through internships"
-  }
+      "year": "01/2025 – 04/2025",
+      "event": "Full-Stack Developer Intern at Tecoreng (Worked on HRMS modules and React frontends)"
+    },
+    {
+      "year": "05/2025 – 12/2025",
+      "event": "Software Developer Intern at BMV System Integration (Worked on ticketing platforms and legacy dating apps)"
+    },
+    {
+      "year": "12/2025 – Present",
+      "event": "Software Developer at GarageWale Autotech Pvt. Ltd (Developing Partner and User mobile apps)"
+    }
   ]
 }

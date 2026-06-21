@@ -1,12 +1,9 @@
 import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
-
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import about from "../../data/about.json";
 import { shouldReduceMotion } from "../../utils/motion";
-import Carousel from "../animated_components/components/Carousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,11 +11,40 @@ type TimelineItem = { year: string; event: string };
 
 type AboutData = {
   story: string;
-  skills: string[];
   timeline?: TimelineItem[];
 };
 
 const data = about as AboutData;
+
+function RooftopAesthetic() {
+  return (
+    <svg width="100%" height="240" viewBox="0 0 100 60" style={{ imageRendering: 'pixelated', opacity: 0.85, display: 'block', margin: '0 auto' }}>
+      {/* Electrical poles */}
+      <line x1="12" y1="10" x2="12" y2="60" stroke="#8A847A" strokeWidth="1" />
+      <line x1="88" y1="15" x2="88" y2="60" stroke="#8A847A" strokeWidth="1" />
+      
+      {/* Cross beams */}
+      <line x1="7" y1="18" x2="17" y2="18" stroke="#8A847A" strokeWidth="1.5" />
+      <line x1="83" y1="23" x2="93" y2="23" stroke="#8A847A" strokeWidth="1.5" />
+      
+      {/* Wires */}
+      <path d="M12 18 Q50 32, 88 23" fill="none" stroke="#8A847A" strokeWidth="0.75" />
+      <path d="M12 21 Q50 35, 88 26" fill="none" stroke="#8A847A" strokeWidth="0.5" strokeDasharray="1,1" />
+      
+      {/* Bird on wire */}
+      <rect x="45" y="25.5" width="3" height="2" fill="#1F2937" />
+      <rect x="46" y="24.5" width="1" height="1" fill="#1F2937" />
+      
+      {/* Concrete ledge */}
+      <rect x="0" y="48" width="100" height="12" fill="#B46A4F" />
+      <rect x="0" y="46" width="100" height="2" fill="#8A847A" />
+      
+      {/* Soft Cloud */}
+      <rect x="62" y="4" width="16" height="4" fill="#FFFFFF" opacity="0.9" />
+      <rect x="65" y="2" width="10" height="2" fill="#FFFFFF" opacity="0.9" />
+    </svg>
+  );
+}
 
 export default function About() {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -37,11 +63,11 @@ export default function About() {
               y: 0,
               duration: 0.7,
               ease: "power2.out",
-              delay: i * 0.05,
+              delay: i * 0.08,
               scrollTrigger: {
                 trigger: el,
                 start: "top 80%",
-                toggleActions: "play none none reverse",
+                once: true,
               },
             };
         gsap.fromTo(el, from, to as any);
@@ -59,71 +85,151 @@ export default function About() {
       sx={{ py: { xs: 8, md: 12 } }}
     >
       <Container maxWidth="lg">
-        <Stack spacing={{ xs: 4, md: 6 }}>
-          <Stack spacing={1.5} className="about-reveal">
+        <Stack spacing={{ xs: 6, md: 8 }}>
+          
+          {/* Header */}
+          <Stack spacing={1.5} className="about-reveal" alignItems="center" textAlign="center">
             <Typography
+              className="pixel-font"
               id="about-heading"
               variant="overline"
-              color="text.secondary"
+              sx={{ color: "primary.main", fontWeight: 700, letterSpacing: "1.5px" }}
             >
-              About Me
+              [ About Me ]
             </Typography>
-            <Typography variant="h4" fontWeight={700} lineHeight={1.2}>
+            <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
               A little bit of my story
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{ maxWidth: "75ch" }}
-            >
-              {data.story}
             </Typography>
           </Stack>
 
-          <Box className="about-reveal" sx={{overflow:"hidden"}}>
-            <Typography variant="h6" fontWeight={700} gutterBottom>
-              Tech stack
-            </Typography>
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                mt:3,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Carousel></Carousel>
+          {/* Core Grid */}
+          <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+            
+            {/* Story Card */}
+            <Grid item xs={12} md={7} className="about-reveal">
+              <Paper
+                className="pixel-card"
+                sx={{
+                  p: { xs: 3, sm: 4 },
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: { xs: "1rem", sm: "1.1rem" },
+                    lineHeight: 1.7,
+                    fontWeight: 500,
+                  }}
+                >
+                  {data.story}
+                </Typography>
+                
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  sx={{
+                    fontSize: { xs: "0.95rem", sm: "1rem" },
+                    lineHeight: 1.7,
+                  }}
+                >
+                  I enjoy working at the intersection of robust backend services and smooth mobile frontends. Creating products that are clean, readable, and highly functional is my core focus.
+                </Typography>
+              </Paper>
             </Grid>
-          </Box>
 
+            {/* Illustration */}
+            <Grid item xs={12} md={5} className="about-reveal">
+              <Box 
+                sx={{ 
+                  bgcolor: (t) => t.palette.mode === "light" ? "rgba(175,203,234,0.3)" : "rgba(36,45,62,0.5)",
+                  border: "2px solid",
+                  borderColor: "text.primary",
+                  boxShadow: (t) => `4px 4px 0px 0px ${t.palette.text.primary}`,
+                  p: 3,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <RooftopAesthetic />
+              </Box>
+            </Grid>
+          </Grid>
+
+          {/* Timeline Section */}
           {data.timeline && data.timeline.length > 0 && (
-            <Stack spacing={2} className="about-reveal">
-              <Typography variant="h6" fontWeight={700}>
-                Timeline
+            <Box className="about-reveal" sx={{ maxWidth: "md", mx: "auto", width: "100%", pt: 4 }}>
+              <Typography 
+                className="pixel-font" 
+                variant="h5" 
+                fontWeight={700} 
+                sx={{ mb: 4, textAlign: { xs: "left", md: "center" } }}
+              >
+                Journey Timeline
               </Typography>
-              <Stack spacing={2} sx={{ position: "relative" }}>
+              
+              <Box 
+                sx={{ 
+                  position: "relative", 
+                  pl: { xs: 3, sm: 4 }, 
+                  ml: { xs: 1, md: "auto" },
+                  mr: { md: "auto" },
+                  borderLeft: "2px dashed", 
+                  borderColor: "text.primary" 
+                }}
+              >
                 {data.timeline.map((item, idx) => (
-                  <Stack
-                    key={`${item.year}-${idx}`}
-                    direction="row"
-                    spacing={2}
-                    alignItems="flex-start"
-                  >
-                    <Box sx={{ pt: 0.5, color: "primary.main" }}>
-                      <FiberManualRecordIcon fontSize="small" />
-                    </Box>
+                  <Box key={`${item.year}-${idx}`} sx={{ position: "relative", mb: 4, "&:last-child": { mb: 0 } }}>
+                    {/* Rotated Diamond Node */}
+                    <Box
+                      sx={(theme) => ({
+                        position: "absolute",
+                        left: { xs: -33, sm: -41 },
+                        top: 2,
+                        width: 16,
+                        height: 16,
+                        bgcolor: theme.palette.background.default,
+                        border: `2px solid ${theme.palette.text.primary}`,
+                        transform: "rotate(45deg)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        "&::after": {
+                          content: '""',
+                          width: 6,
+                          height: 6,
+                          bgcolor: theme.palette.primary.main,
+                        }
+                      })}
+                    />
+                    
                     <Box>
-                      <Typography variant="subtitle2" color="text.secondary">
+                      <Typography 
+                        className="pixel-font" 
+                        variant="subtitle2" 
+                        color="primary.main" 
+                        fontWeight={700}
+                        sx={{ fontSize: "1rem" }}
+                      >
                         {item.year}
                       </Typography>
-                      <Typography variant="body1">{item.event}</Typography>
+                      <Typography 
+                        variant="body1" 
+                        fontWeight={600} 
+                        sx={{ mt: 0.5, fontSize: { xs: "0.95rem", sm: "1.05rem" } }}
+                      >
+                        {item.event}
+                      </Typography>
                     </Box>
-                  </Stack>
+                  </Box>
                 ))}
-              </Stack>
-            </Stack>
+              </Box>
+            </Box>
           )}
+
         </Stack>
       </Container>
     </Box>

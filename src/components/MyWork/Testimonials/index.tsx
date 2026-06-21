@@ -29,6 +29,7 @@ const items = testimonials as Testimonial[];
 export default function Testimonials() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const { mode } = useColorMode();
+
   useLayoutEffect(() => {
     if (!rootRef.current) return;
     const reduce = shouldReduceMotion();
@@ -43,11 +44,11 @@ export default function Testimonials() {
               y: 0,
               duration: 0.6,
               ease: "power2.out",
-              delay: i * 0.05,
+              delay: i * 0.08,
               scrollTrigger: {
                 trigger: el,
                 start: "top 88%",
-                toggleActions: "play none none reverse",
+                once: true,
               },
             };
         gsap.fromTo(el, from, to as any);
@@ -61,18 +62,24 @@ export default function Testimonials() {
       ref={rootRef}
       component="section"
       aria-labelledby="testimonials-heading"
-      sx={{ pt: { xs: 6, md: 8 } }}
+      sx={{ py: { xs: 6, md: 8 } }}
     >
-      <Container maxWidth="lg">
-        <Stack spacing={1} sx={{ mb: 2 }}>
-          <Typography id="testimonials-heading" variant="h5" fontWeight={700}>
+      <Container maxWidth="md">
+        <Stack spacing={1.5} sx={{ mb: 6 }} alignItems="center" textAlign="center">
+          <Typography 
+            className="pixel-font"
+            id="testimonials-heading" 
+            variant="overline" 
+            sx={{ color: "primary.main", fontWeight: 700, letterSpacing: "1.5px" }}
+          >
+            [ Kind Words ]
+          </Typography>
+          <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
             Testimonials
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Want to write one? Reach out via Contact!
-          </Typography>
         </Stack>
-        {items.length > 0 ? (
+
+        {items.length === 0 ? (
           <PixelTransition
             firstContent={
               <Typography
@@ -95,46 +102,45 @@ export default function Testimonials() {
                 }}
               >
                 <Typography
-                  variant="h4"
+                  variant="h5"
                   fontWeight={700}
                   color={`${mode !== "dark" ? "#222" : "#f5f5f5"}`}
                   align="center"
                   sx={{
+                    px: 3,
                     fontSize: {
-                      xs: "1.5rem",
-                      sm: "2rem",
-                      md: "2.5rem",
+                      xs: "1.25rem",
+                      sm: "1.5rem",
                     },
                   }}
                 >
-                  Testimonials coming soon. Yours could be the first — let’s
-                  make something rave-worthy.
+                  Testimonials coming soon. Yours could be the first — let’s make something rave-worthy.
                 </Typography>
               </Box>
             }
             style={{
               backgroundColor: `${mode === "dark" ? "#222" : "#f5f5f5"}`,
+              border: `2px solid ${mode === "dark" ? "#FFF" : "#1F2937"}`,
+              minHeight: '200px',
             }}
             gridSize={12}
             pixelColor={mode === "dark" ? "#f5f5f5" : "#222"}
             animationStepDuration={0.4}
           />
         ) : (
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {items.map((t, idx) => (
-              <Grid key={`${t.name}-${idx}`} item xs={12} sm={6} md={4}>
+              <Grid key={`${t.name}-${idx}`} item xs={12} sm={6}>
                 <Card
-                  className="testimonial-card"
-                  variant="outlined"
-                  color="#f5f5f5"
-                  sx={{ height: "100%" }}
+                  className="testimonial-card pixel-card"
+                  sx={{ height: "100%", p: 2, outline: "none" }}
                 >
                   <CardContent>
-                    <FormatQuoteRoundedIcon color="disabled" />
-                    <Typography variant="body1" sx={{ my: 1.25 }}>
+                    <FormatQuoteRoundedIcon sx={{ color: "primary.main", fontSize: 32 }} />
+                    <Typography variant="body1" sx={{ my: 1.5, lineHeight: 1.6, fontWeight: 500 }}>
                       “{t.quote}”
                     </Typography>
-                    <Typography variant="subtitle2" fontWeight={700}>
+                    <Typography className="pixel-font" variant="subtitle2" fontWeight={700}>
                       {t.name}
                     </Typography>
                     {t.role && (

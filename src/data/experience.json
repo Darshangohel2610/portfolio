@@ -1,16 +1,23 @@
 [
   {
-    "company": "Bmv system integration pvt Ltd",
-    "role": "Software developer intern",
-    "period": "05/2025 – present",
-    "summary": "Collaborating with the frontend team to build responsive, user-friendly web interfaces using React and MUI. Developing modular, reusable components while maintaining a clean, scalable codebase aligned with best practices.",
-    "technologies": ["TypeScript", "MUI", "Supabase", "GSAP", "Hono"]
+    "company": "GarageWale Autotech Pvt. Ltd",
+    "role": "Software Developer",
+    "period": "12/2025 – Present",
+    "summary": "Contributed to production readiness and development of Partner and User mobile apps using React Native. Developed CRM, booking, package management, and customer engagement features. Integrated Razorpay subscriptions, Vehicle Tag workflows, deep linking, and OCR-assisted vehicle number plate scanning. Managed Android release builds and resolved production issues.",
+    "technologies": ["React Native", "TypeScript", "Razorpay", "OCR", "Deep Linking", "Android Release"]
+  },
+  {
+    "company": "BMV System Integration Pvt. Ltd",
+    "role": "Software Developer Intern",
+    "period": "05/2025 – 12/2025",
+    "summary": "Contributed to a React-based ticket management platform by developing UI features and resolving application issues. Maintained and implemented new screens for a legacy React Native dating application, generating mobile builds and assisting with API documentation.",
+    "technologies": ["React", "React Native", "Material UI", "API Integration", "Mobile Builds"]
   },
   {
     "company": "Tecoreng",
     "role": "Full-Stack Developer Intern",
     "period": "01/2025 – 04/2025",
-    "summary": "Developed and maintained full-stack applications using MERN and PERN stacks. Built frontends with React.js and Next.js, integrated RESTful APIs with Node.js and Express.js, and deployed containerized applications on AWS.",
-    "technologies": ["React", "Next.js", "Express", "PostgreSQL", "GitLab","AWS"]
+    "summary": "Contributed to frontend development using React across multiple web applications. Developed HRMS-related modules and collaborated using Git-based development workflows.",
+    "technologies": ["React", "Node.js", "Express", "HRMS", "Git", "GitLab"]
   }
 ]

@@ -1,42 +1,32 @@
 [
   {
-    "title": "Policy Chatbot UI (Company Project)",
-    "description": "Built UI screens using React, TypeScript, and MUI. Integrated REST APIs and improved user experience for internal chatbot workflows.",
+    "title": "Habit Builder",
+    "description": "A progressive web app (PWA) habit tracker built with Next.js, TypeScript, and MUI. Features streaks, daily logging trackers, offline-first capabilities, and progress metrics.",
+    "link": "https://github.com/Darshangohel2610/Habit-Builder"
+  },
+  {
+    "title": "Mood-Based Recommendation System",
+    "description": "An emotion-aware recommender system leveraging AWS Rekognition for facial analysis, serverless AWS Lambda, DynamoDB, and a responsive Next.js web application interface.",
+    "link": ""
+  },
+  {
+    "title": "Leela Films Website (Freelance)",
+    "description": "Developed and deployed a corporate portfolio website using React, Tailwind CSS, and custom branding templates. Built administrative functionality and implemented branding requirements.",
+    "link": "https://github.com/Darshangohel2610/LeelaFilms_Backend"
+  },
+  {
+    "title": "Jewelry E-Commerce Website (Freelance)",
+    "description": "Developed a responsive e-commerce frontend interface using React. Implemented search, cart functionalities, item list rendering, and user-facing purchase checkout flows.",
+    "link": ""
+  },
+  {
+    "title": "GarageWale Mobile Apps (Company Project)",
+    "description": "Contributed to production readiness of Partner and User mobile apps with React Native. Integrated Razorpay subscriptions, Vehicle Tag workflows, deep linking, and OCR scanning.",
     "link": ""
   },
   {
     "title": "Task & Ticket Management Platform (Company Project)",
-    "description": "Developed pages, handled API integrations, optimized performance, and contributed to core modules of a Zoho-like management system.",
+    "description": "Contributed to building a collaborative workspace ticket tracker, optimizing API fetches, layout rendering, and complex task status pipelines using React and MUI.",
     "link": ""
-  },
-  {
-    "title": "Dating App (iOS, Legacy Project)",
-    "description": "Worked on a large React Native codebase, fixed bugs, refactored components, integrated APIs, and improved overall stability for iOS builds.",
-    "link": ""
-  },
-  {
-    "title": "Jewelry E-Commerce Website (Freelance)",
-    "description": "Built responsive frontend UI using React, Tailwind, and GSAP animations. Designed smooth product interactions and mobile-friendly layouts.",
-    "link": ""
-  },
-  {
-    "title": "Habit-Builder (In-Progress)",
-    "description": "PWA-style habit tracker built with Next.js, TypeScript, and MUI. Features streaks, daily tracking, and offline-first functionality.",
-    "link": "https://github.com/Darshangohel2610/Habit-Builder"
-  },
-  {
-    "title": "Mood-Based Content Recommender (Cloud-Native, In-Progress)",
-    "description": "Emotion-based recommendation system using AWS Rekognition, Lambda, DynamoDB, and Next.js. Handles mood detection and personalized content suggestions.",
-    "link": ""
-  },
-  {
-    "title": "Portfolio",
-    "description": "Personal portfolio built with React, TypeScript, Tailwind, and Framer Motion/GSAP. Showcases projects, animations, and experience with a clean UI.",
-    "link": "https://github.com/Darshangohel2610/portfolio"
-  },
-  {
-    "title": "Dev Playground",
-    "description": "A repo of experimental code snippets, small features, and practice projects used to test new libraries, patterns, and UI ideas.",
-    "link": "https://github.com/Darshangohel2610/some-random-codes"
   }
 ]

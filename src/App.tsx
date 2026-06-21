@@ -1,98 +1,67 @@
-import { Box,SpeedDial, SpeedDialAction, SpeedDialIcon } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { Box, IconButton } from "@mui/material";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import MyWork from "./components/MyWork";
+import Experience from "./components/MyWork/Experience";
+import Projects from "./components/MyWork/Projects";
+import Testimonials from "./components/MyWork/Testimonials";
+import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import SplashCursor from "./components/animated_components/components/SplashCursor";
 import { useColorMode } from "./styles/colorMode";
-import LightRays from "./components/animated_components/components/LightRays";
 import Navbar from "./components/Navbar";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import { PiCat } from "react-icons/pi";
-
-function SectionWrapper({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    gsap.fromTo(
-      el,
-      { autoAlpha: 0, y: 24 },
-      { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" }
-    );
-  }, []);
-  return (
-    <Box ref={ref} component="section" sx={{ py: { xs: 6, md: 10 } }}>
-      {children}
-    </Box>
-  );
-}
 
 export default function App() {
   const { mode, toggleColorMode } = useColorMode();
-  const [cursorOn, setCursorOn] = useState(false);
 
   return (
     <>
       <Box id="top" />
       <Navbar />
-      {cursorOn && <SplashCursor />}
-      {/* <LightRays raysOrigin="bottom-center"></LightRays> */}
 
       <Box>
         <Hero />
         <About />
-        <MyWork />
+        <Experience />
+        <Projects />
+        <Testimonials />
+        <Skills />
         <Contact />
         <Footer />
       </Box>
 
-      <SpeedDial
-        ariaLabel="Quick actions"
-        icon={<PiCat size={30}/>}
-        direction="up"
-        sx={{
+      {/* Modern floating theme toggle button */}
+      <IconButton
+        onClick={toggleColorMode}
+        color="inherit"
+        aria-label={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        sx={(theme) => ({
           position: "fixed",
-          bottom: { xs: 12, md: 16 },
-          right: { xs: 12, md: 16 },
-          zIndex: (t) => t.zIndex.appBar + 2,
-          "& .MuiFab-root": {
-        width: { xs: 38, md: 48 },
-        height: { xs: 38, md: 48 },
+          bottom: { xs: 16, md: 24 },
+          right: { xs: 16, md: 24 },
+          zIndex: theme.zIndex.appBar + 2,
+          bgcolor: theme.palette.mode === 'dark' ? 'rgba(36,45,62,0.85)' : 'rgba(246,244,238,0.85)',
+          backdropFilter: 'blur(8px)',
+          border: '2px solid',
+          borderColor: theme.palette.text.primary,
+          boxShadow: `3px 3px 0px 0px ${theme.palette.text.primary}`,
+          borderRadius: 0,
+          p: { xs: 1, md: 1.5 },
+          transition: 'transform 0.1s, box-shadow 0.1s',
+          '&:hover': {
+            bgcolor: theme.palette.mode === 'dark' ? 'rgba(36,45,62,0.95)' : 'rgba(246,244,238,0.95)',
+            transform: 'translate(-2px, -2px)',
+            boxShadow: `5px 5px 0px 0px ${theme.palette.text.primary}`,
           },
-        }}
-        FabProps={{
-          size: "medium",
-        }}
+          '&:active': {
+            transform: 'translate(2px, 2px)',
+            boxShadow: '0px 0px 0px 0px currentColor',
+          }
+        })}
       >
-        <SpeedDialAction
-          key="toggle-theme"
-          icon={mode === "dark" ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
-          tooltipTitle={mode === "dark" ? "Light mode" : "Dark mode"}
-          onClick={toggleColorMode}
-          sx={{
-        "& .MuiSvgIcon-root": {
-          fontSize: { xs: 20, md: 24 },
-        },
-          }}
-        />
-        <SpeedDialAction
-          key="toggle-cursor"
-          icon={<AutoAwesomeIcon color={cursorOn ? "primary" : undefined} fontSize="small" />}
-          tooltipTitle={cursorOn ? "Disable Splash Cursor" : "Enable Splash Cursor"}
-          onClick={() => setCursorOn((v) => !v)}
-          sx={{
-        "& .MuiSvgIcon-root": {
-          fontSize: { xs: 20, md: 24 },
-        },
-          }}
-        />
-      </SpeedDial>
+        {mode === "dark" ? <LightModeIcon sx={{ fontSize: { xs: 20, md: 24 } }} /> : <DarkModeIcon sx={{ fontSize: { xs: 20, md: 24 } }} />}
+      </IconButton>
     </>
   );
 }

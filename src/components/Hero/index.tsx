@@ -1,195 +1,287 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import hero from "../../data/hero.json";
-import { shouldReduceMotion } from "../../utils/motion";
-import ShinyText from "../animated_components/components/ShinyText";
-import "./Hero.css";
-import Crosshair from "../animated_components/components/Crosshair";
-import { useColorMode } from "@/styles/colorMode";
-import LightRays from "../animated_components/components/LightRays";
-type HeroData = {
-  name: string;
-  tagline: string;
-  intro: string;
-  cta: string;
-};
+import { useEffect, useState } from "react";
+import { useColorMode } from "../../styles/colorMode";
 
-const data = hero as HeroData;
+function PixelCloud1() {
+  return (
+    <svg width="120" height="60" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ imageRendering: 'pixelated' }}>
+      <path d="M16 4h16v4H16V4zm-8 4h32v4H8V8zm-4 4h40v4H4v-4zm-2 4h44v4H2v-4zm0 4h44v4H2v-4z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PixelCloud2() {
+  return (
+    <svg width="180" height="90" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ imageRendering: 'pixelated' }}>
+      <path d="M20 6h24v4H20V6zm-10 4h44v4H10v-4zm-6 4h52v4H4v-4zm-2 4h56v4H2v-4zm0 4h56v4H2v-4zm2 4h52v4H4v-4z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PixelCharacter() {
+  return (
+    <svg width="140" height="140" viewBox="0 0 32 32" style={{ imageRendering: 'pixelated', display: 'block', margin: '0 auto' }}>
+      {/* Cloud */}
+      <rect x="4" y="24" width="24" height="5" fill="#FFFFFF" />
+      <rect x="6" y="22" width="20" height="2" fill="#FFFFFF" />
+      <rect x="8" y="20" width="16" height="2" fill="#FFFFFF" />
+      
+      {/* Pants (Dark slate) */}
+      <rect x="12" y="19" width="8" height="2" fill="#1F2937" />
+      
+      {/* Shirt/Torso (Brick accent) */}
+      <rect x="12" y="12" width="8" height="7" fill="#B46A4F" /> 
+      
+      {/* Head & Neck (Skin tone) */}
+      <rect x="14" y="11" width="4" height="1" fill="#F5D0A9" />
+      <rect x="12" y="5" width="8" height="6" fill="#F5D0A9" /> 
+      
+      {/* Hair (Brown) */}
+      <rect x="11" y="4" width="10" height="2" fill="#4A3B32" />
+      <rect x="11" y="6" width="2" height="3" fill="#4A3B32" />
+      <rect x="19" y="6" width="2" height="3" fill="#4A3B32" />
+      
+      {/* Face features */}
+      <rect x="14" y="7" width="1" height="1" fill="#000000" /> {/* Eye */}
+      <rect x="17" y="7" width="1" height="1" fill="#000000" /> {/* Eye */}
+      <rect x="15" y="9" width="2" height="1" fill="#E28B6E" /> {/* Mouth */}
+      
+      {/* Laptop (Warm Gray) */}
+      <rect x="20" y="18" width="6" height="2" fill="#8A847A" /> {/* Base */}
+      <rect x="23" y="13" width="1" height="5" fill="#8A847A" /> {/* Lid */}
+      <rect x="22" y="14" width="1" height="4" fill="#AFCBEA" opacity="0.8" /> {/* Screen light */}
+      
+      {/* Hands (Skin tone) */}
+      <rect x="18" y="16" width="3" height="1" fill="#F5D0A9" />
+      
+      {/* Laptop Light Beam (translucent soft blue) */}
+      <polygon points="22,14 17,11 17,21 22,18" fill="rgba(175, 203, 234, 0.2)" />
+    </svg>
+  );
+}
 
 export default function Hero() {
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useColorMode();
-  useLayoutEffect(() => {
-    if (!rootRef.current) return;
-    const reduce = shouldReduceMotion();
-    const ctx = gsap.context(() => {
-      if (reduce) {
-        gsap.set(
-          [
-            ".hero-name",
-            ".hero-tagline",
-            ".hero-intro",
-            ".hero-cta",
-            ".scroll-hint",
-          ],
-          { autoAlpha: 1, y: 0 }
-        );
-        return;
-      }
-      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-      tl.from(".hero-name", { autoAlpha: 0, y: 20, duration: 0.6 })
-        .from(".hero-tagline", { autoAlpha: 0, y: 18, duration: 0.5 }, "-=0.2")
-        .from(".hero-intro", { autoAlpha: 0, y: 16, duration: 0.5 }, "-=0.2")
-        .from(".hero-cta", { autoAlpha: 0, y: 10, duration: 0.4 }, "-=0.2");
+  const { mode } = useColorMode();
 
-      gsap.fromTo(
-        ".scroll-hint",
-        { autoAlpha: 0, y: 0 },
-        {
-          autoAlpha: 1,
-          y: 6,
-          duration: 1.2,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          delay: 1.1,
-        }
-      );
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  const onCtaClick = () => {
-    const el = document.querySelector("#work");
+  const handleScrollTo = (selector: string) => {
+    const el = document.querySelector(selector);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
     <Box
-      ref={rootRef}
       component="header"
-      role="banner"
-      aria-labelledby="hero-heading"
       sx={{
+        position: "relative",
         minHeight: "100svh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
+        overflow: "hidden",
+        background: mode === "light" 
+          ? "linear-gradient(to bottom, #AFCBEA 0%, #F6F4EE 100%)"
+          : "linear-gradient(to bottom, #0F141C 0%, #1B2230 100%)",
+        pt: { xs: 12, md: 16 },
+        pb: { xs: 8, md: 10 },
       }}
     >
-      <LightRays></LightRays>
-
-      <Box ref={containerRef} style={{ height: "300px", overflow: "hidden" }}>
-        <Crosshair
-          containerRef={rootRef}
-          color={mode === "dark" ? "#ffffff" : "#222222"}
-        />
+      {/* Floating clouds in background */}
+      <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, overflow: "hidden", pointerEvents: "none", zIndex: 1 }}>
+        {/* Cloud 1 */}
+        <Box
+          className="pixel-cloud"
+          sx={{
+            position: "absolute",
+            top: "15%",
+            color: "rgba(255, 255, 255, 0.75)",
+            animation: "floatSlow 40s linear infinite",
+          }}
+        >
+          <PixelCloud1 />
+        </Box>
+        {/* Cloud 2 */}
+        <Box
+          className="pixel-cloud"
+          sx={{
+            position: "absolute",
+            top: "40%",
+            color: "rgba(255, 255, 255, 0.6)",
+            animation: "floatMedium 55s linear infinite",
+          }}
+        >
+          <PixelCloud2 />
+        </Box>
+        {/* Cloud 3 */}
+        <Box
+          className="pixel-cloud"
+          sx={{
+            position: "absolute",
+            top: "60%",
+            color: "rgba(255, 255, 255, 0.45)",
+            animation: "floatFast 30s linear infinite",
+          }}
+        >
+          <PixelCloud1 />
+        </Box>
       </Box>
-      <Container maxWidth="lg">
-        <Stack spacing={{ xs: 2, sm: 2.5, md: 3 }} alignItems="center">
-          <Typography
-            id="hero-heading"
-            className="hero-name"
-            variant="h1"
-            sx={{
-              fontWeight: 800,
-              lineHeight: 1.1,
-              fontSize: {
-                xs: "2.25rem",
-                sm: "2.75rem",
-                md: "3.5rem",
-                lg: "4rem",
-              },
+
+      {/* Dark mode stars */}
+      {mode === "dark" && (
+        <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, pointerEvents: "none", zIndex: 1 }}>
+          <Box sx={{ position: "absolute", top: "12%", left: "15%", width: 4, height: 4, bgcolor: "#fff", animation: "twinkle 2s infinite steps(2)" }} />
+          <Box sx={{ position: "absolute", top: "20%", left: "80%", width: 6, height: 6, bgcolor: "#fff", animation: "twinkle 3s infinite steps(3)" }} />
+          <Box sx={{ position: "absolute", top: "35%", left: "48%", width: 4, height: 4, bgcolor: "#fff", animation: "twinkle 2.5s infinite steps(2)" }} />
+          <Box sx={{ position: "absolute", top: "55%", left: "70%", width: 5, height: 5, bgcolor: "#fff", animation: "twinkle 4s infinite steps(4)" }} />
+          <Box sx={{ position: "absolute", top: "75%", left: "25%", width: 4, height: 4, bgcolor: "#fff", animation: "twinkle 3.2s infinite steps(3)" }} />
+        </Box>
+      )}
+
+      <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
+        <Stack spacing={{ xs: 4, sm: 5 }} alignItems="center">
+          {/* Animated Pixel Character Sitting on Cloud */}
+          <Box 
+            sx={{ 
+              animation: "hoverCloud 4s ease-in-out infinite",
+              mb: -2,
             }}
           >
-            Hey, I'm {data.name}
-          </Typography>
-
-          <Typography
-            className="hero-tagline"
-            variant="h4"
-            color="text.secondary"
-            sx={{
-              fontWeight: 600,
-              fontSize: { xs: "1.125rem", sm: "1.25rem", md: "1.5rem" },
-            }}
-          >
-            {data.tagline}
-          </Typography>
-
-          <Typography
-            className="hero-intro"
-            variant="body1"
-            color="text.secondary"
-            sx={{ maxWidth: "65ch" }}
-          >
-            {data.intro}
-          </Typography>
-
-          <Box className="hero-cta" sx={{ width: "100%" }}>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Button
-                variant="outlined"
-                color="primary"
-                size="large"
-                target="_blank"
-                component="a"
-                href="https://drive.google.com/file/d/1dbe2aC0YBwcV17Hlkggqw-tW5LrsYXl-/view?usp=sharing"
-                download
-                aria-label="Download Resume PDF"
-              >
-                Download Resume
-              </Button>
-
-                <Button
-                variant="contained"
-                size="large"
-                sx={{
-                  bgcolor: "#1565c0", // darker shade of blue
-                  "&:hover": {
-                  bgcolor: "#0d47a1", // even darker on hover
-                  },
-                }}
-                onClick={onCtaClick}
-                aria-label={data.cta}
-                >
-                <ShinyText
-                  text={`${data.cta}`}
-                  disabled={false}
-                  speed={3}
-                  className="custom-class"
-                />{" "}
-                </Button>
-            </Stack>
+            <PixelCharacter />
           </Box>
+
+          <Stack spacing={{ xs: 2, sm: 2.5 }} alignItems="center">
+            {/* Small Pixel badge */}
+            <Typography
+              className="pixel-font"
+              variant="subtitle2"
+              sx={(t) => ({
+                color: t.palette.mode === "light" ? "text.primary" : "info.main",
+                border: "1px solid currentColor",
+                px: 1.5,
+                py: 0.5,
+                fontSize: { xs: "0.75rem", sm: "0.85rem" },
+              })}
+            >
+              AHMEDABAD, IN
+            </Typography>
+
+            <Typography
+              variant="h1"
+              sx={{
+                fontWeight: 800,
+                lineHeight: 1.1,
+                fontSize: {
+                  xs: "2.75rem",
+                  sm: "3.75rem",
+                  md: "4.5rem",
+                },
+                letterSpacing: "-1px",
+              }}
+            >
+              DARSHAN GOHEL
+            </Typography>
+
+            <Typography
+              className="pixel-font"
+              variant="h5"
+              sx={(t) => ({
+                fontWeight: 700,
+                color: t.palette.mode === "light" ? "primary.main" : "secondary.main",
+                fontSize: { xs: "1.1rem", sm: "1.4rem", md: "1.6rem" },
+              })}
+            >
+              React Native Developer
+            </Typography>
+
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              sx={{ 
+                maxWidth: "50ch", 
+                fontSize: { xs: "1rem", sm: "1.15rem" },
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
+              Building apps, products, and experiences one pixel at a time.
+            </Typography>
+          </Stack>
+
+          {/* CTA Buttons */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={3}
+            justifyContent="center"
+            alignItems="center"
+            sx={{ width: "100%", pt: 2 }}
+          >
+            <Button
+              onClick={() => handleScrollTo("#projects")}
+              className="pixel-btn pixel-btn-primary"
+            >
+              View Projects
+            </Button>
+
+            <Button
+              onClick={() => handleScrollTo("#contact")}
+              className="pixel-btn"
+            >
+              Contact Me
+            </Button>
+          </Stack>
         </Stack>
       </Container>
 
+      {/* Down arrow indicator */}
       <Box
-        className="scroll-hint"
+        onClick={() => handleScrollTo("#about")}
         aria-hidden
         sx={{
           position: "absolute",
           left: 0,
           right: 0,
-          bottom: 16,
+          bottom: 24,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           color: "text.secondary",
+          cursor: "pointer",
+          animation: "bounce 2s infinite",
+          zIndex: 2,
         }}
       >
         <KeyboardArrowDownIcon fontSize="large" />
       </Box>
+
+      {/* Hero Specific CSS animations */}
+      <style>{`
+        @keyframes floatSlow {
+          0% { transform: translateX(110vw); }
+          100% { transform: translateX(-150px); }
+        }
+        @keyframes floatMedium {
+          0% { transform: translateX(110vw); }
+          100% { transform: translateX(-200px); }
+        }
+        @keyframes floatFast {
+          0% { transform: translateX(110vw); }
+          100% { transform: translateX(-150px); }
+        }
+        @keyframes hoverCloud {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.2; }
+          50% { opacity: 1; }
+        }
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-6px); }
+          60% { transform: translateY(-3px); }
+        }
+      `}</style>
     </Box>
   );
 }

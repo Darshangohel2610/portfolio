@@ -4,7 +4,10 @@ import gsap from 'gsap'
 
 const tabs = [
   { label: 'Home', href: '#top' },
-  { label: 'My Work', href: '#work' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -15,7 +18,8 @@ export default function Navbar() {
 
   // Determine active tab by hash
   const activeIndex = useMemo(() => {
-    const hash = typeof window !== 'undefined' ? window.location.hash : ''
+    if (typeof window === 'undefined') return 0
+    const hash = window.location.hash
     const i = tabs.findIndex(t => t.href === hash)
     return i >= 0 ? i : 0
   }, [typeof window !== 'undefined' ? window.location.hash : ''])
@@ -25,50 +29,61 @@ export default function Navbar() {
   useEffect(() => {
     if (!barRef.current) return
     const ctx = gsap.context(() => {
-      gsap.fromTo('.navbar-container', { y: -20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' })
+      gsap.fromTo('.navbar-container', 
+        { y: -20, autoAlpha: 0 }, 
+        { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' }
+      )
     }, barRef)
     return () => ctx.revert()
   }, [])
 
   // Update active tab on manual scroll
   useEffect(() => {
-    const links = tabs.map(t => t.href)
     const getTop = (hash: string) => {
       if (hash === '#top') return 0
       const el = document.querySelector(hash) as HTMLElement | null
       if (!el) return Number.POSITIVE_INFINITY
       return el.getBoundingClientRect().top + window.scrollY
     }
+    
     let ticking = false
     const update = () => {
       ticking = false
       if (isManualScrolling) return // skip while smooth scroll in progress
 
-      const threshold = window.innerHeight * 0.35
+      const threshold = window.innerHeight * 0.4
       const y = window.scrollY + threshold
-      const workTop = getTop('#work')
-      const contactTop = getTop('#contact')
-      let idx = 0
-      if (y >= contactTop) idx = 2
-      else if (y >= workTop) idx = 1
-      else idx = 0
+
+      // Find the active section based on scroll position
+      let activeIdx = 0
+      for (let i = tabs.length - 1; i >= 0; i--) {
+        const topVal = getTop(tabs[i].href)
+        if (y >= topVal) {
+          activeIdx = i
+          break
+        }
+      }
+
       setValue(prev => {
-        if (prev !== idx) {
-          const href = links[idx]
+        if (prev !== activeIdx) {
+          const href = tabs[activeIdx].href
           try { history.replaceState(null, '', href) } catch {}
         }
-        return idx
+        return activeIdx
       })
     }
+
     const onScroll = () => {
       if (ticking) return
       ticking = true
       requestAnimationFrame(update)
     }
+
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
     // initialize
     update()
+    
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
@@ -82,7 +97,7 @@ export default function Navbar() {
 
     // disable scroll listener temporarily
     setIsManualScrolling(true)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (el) el.scrollIntoView()
     history.replaceState(null, '', href)
 
     // re-enable after smooth scroll duration (~800ms)
@@ -96,7 +111,7 @@ export default function Navbar() {
       elevation={0}
       color="transparent"
       sx={{
-        top: 12,
+        top: { xs: 8, md: 16 },
         left: 0,
         right: 0,
         display: 'flex',
@@ -109,14 +124,14 @@ export default function Navbar() {
         <Box
           sx={(theme) => ({
             pointerEvents: 'auto',
-            bgcolor: theme.palette.mode === 'dark' ? 'rgba(22,22,26,0.6)' : 'rgba(255,255,255,0.6)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: 999,
-            border: '1px solid',
-            borderColor: theme.palette.divider,
-            px: { xs: 1, sm: 1.5 },
-            py: { xs: 0.5, sm: 0.75 },
-            boxShadow: '0 4px 20px rgba(0,0,0,0.12)'
+            bgcolor: theme.palette.mode === 'dark' ? 'rgba(27,34,48,0.75)' : 'rgba(246,244,238,0.75)',
+            backdropFilter: 'blur(8px)',
+            borderRadius: 0,
+            border: '2px solid',
+            borderColor: theme.palette.text.primary,
+            px: { xs: 0.5, sm: 1.5 },
+            py: 0.5,
+            boxShadow: `3px 3px 0px 0px ${theme.palette.text.primary}`
           })}
         >
           <Tabs
@@ -127,28 +142,33 @@ export default function Navbar() {
             TabIndicatorProps={{ style: { display: 'none' } }}
             sx={{
               minHeight: 'unset',
+              '& .MuiTabs-flexContainer': {
+                gap: { xs: 0.5, sm: 1 },
+              },
               '& .MuiTab-root': {
+                fontFamily: "'Pixelify Sans', cursive",
+                fontWeight: 600,
+                fontSize: { xs: '0.75rem', sm: '0.9rem' },
                 minHeight: 'unset',
-                minWidth: { xs: 80, sm: 120 },
-                px: { xs: 1.25, sm: 2 },
+                minWidth: 'unset',
+                px: { xs: 1, sm: 2 },
+                py: { xs: 0.5, sm: 0.75 },
                 color: 'text.secondary',
                 transition: 'color .2s ease, transform .2s ease, background-color .2s ease',
-                borderRadius: 999,
+                borderRadius: 0,
                 WebkitTapHighlightColor: 'transparent',
                 '&:hover': {
                   bgcolor: (t) => (t.palette.mode === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)'),
                   color: 'text.primary',
                 },
                 '&:active': {
-                  transform: 'scale(0.98)',
-                  bgcolor: (t) => (t.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'),
+                  transform: 'scale(0.95)',
                 },
               },
               '& .MuiTab-root.Mui-selected': {
                 color: 'primary.main',
                 fontWeight: 700,
-                transform: 'scale(1.02)',
-                bgcolor: (t) => (t.palette.mode === 'dark' ? 'rgba(0,255,106,0.08)' : 'rgba(0,255,106,0.08)'),
+                bgcolor: (t) => (t.palette.mode === 'dark' ? 'rgba(226,139,110,0.08)' : 'rgba(180,106,79,0.08)'),
               },
             }}
           >
@@ -158,19 +178,17 @@ export default function Navbar() {
                 disableRipple
                 disableFocusRipple
                 label={
-                  <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, position: 'relative' }}>
+                  <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5, position: 'relative' }}>
                     {value === i && (
                       <Box
-                        className="active-dot"
-                        sx={{
-                          width: 8,
-                          height: 8,
-                          mb: 0.3,
-                          borderRadius: '50%',
-                          bgcolor: '#00FF6A',
-                          boxShadow: '0 0 8px 2px rgba(0,255,106,0.7)',
-                          animation: 'pulse 1.5s ease-in-out infinite'
-                        }}
+                        className="active-pixel-star"
+                        sx={(theme) => ({
+                          width: 6,
+                          height: 6,
+                          bgcolor: theme.palette.primary.main,
+                          animation: 'pixelPulse 1.5s steps(4) infinite',
+                          boxShadow: `0 0 4px ${theme.palette.primary.main}`,
+                        })}
                       />
                     )}
                     <span>{t.label}</span>
@@ -183,9 +201,9 @@ export default function Navbar() {
       </Toolbar>
 
       <style>{`
-        @keyframes pulse {
+        @keyframes pixelPulse {
           0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.15); opacity: .85; }
+          50% { transform: scale(1.3); opacity: 0.6; }
           100% { transform: scale(1); opacity: 1; }
         }
       `}</style>

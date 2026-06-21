@@ -34,8 +34,8 @@ export default function Experience() {
               y: 0,
               duration: 0.6,
               ease: 'power2.out',
-              delay: i * 0.05,
-              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' },
+              delay: i * 0.08,
+              scrollTrigger: { trigger: el, start: 'top 85%', once: true },
             }
         gsap.fromTo(el, from, to as any)
       })
@@ -44,58 +44,85 @@ export default function Experience() {
   }, [])
 
   return (
-    <Box ref={rootRef} component="section" aria-labelledby="experience-heading" sx={{ py: { xs: 6, md: 8 } }}>
+    <Box 
+      id="experience" 
+      ref={rootRef} 
+      component="section" 
+      aria-labelledby="experience-heading" 
+      sx={{ py: { xs: 8, md: 12 } }}
+    >
       <Container maxWidth="lg">
-        <Stack spacing={2} sx={{ mb: 2 }}>
-          <Typography id="experience-heading" variant="h5" fontWeight={700}>
-            Experience
+        <Stack spacing={1.5} sx={{ mb: 6 }} alignItems="center" textAlign="center">
+          <Typography 
+            className="pixel-font"
+            id="experience-heading" 
+            variant="overline" 
+            sx={{ color: "primary.main", fontWeight: 700, letterSpacing: "1.5px" }}
+          >
+            [ Professional Journey ]
+          </Typography>
+          <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
+            Work Experience
           </Typography>
         </Stack>
-        <Stack spacing={2.5}>
+
+        <Stack spacing={4}>
           {items.map((item, idx) => (
             <Paper
               key={`${item.company}-${idx}`}
-              className="exp-item"
-              variant="outlined"
+              className="exp-item pixel-card"
               tabIndex={0}
               sx={{
-                p: { xs: 2, md: 3 },
-                transform: 'translateY(0) scale(1)',
-                transition: (t) =>
-                  t.transitions.create(['transform', 'box-shadow', 'border-color', 'background-color'], {
-                    duration: 200,
-                    easing: t.transitions.easing.easeOut,
-                  }),
-                '&:hover, &:focus-visible': {
-                  transform: 'translateY(-4px) scale(1.01)',
-                  boxShadow: 6,
-                  borderColor: 'primary.main',
-                  backgroundColor: (t) => (t.palette.mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)'),
-                },
+                p: { xs: 3, md: 4 },
                 outline: 'none',
               }}
             >
-              <Stack spacing={1.25}>
+              <Stack spacing={2}>
                 <Stack
                   direction={{ xs: 'column', sm: 'row' }}
                   justifyContent="space-between"
                   alignItems={{ xs: 'flex-start', sm: 'center' }}
                   spacing={1}
                 >
-                  <Typography variant="h6" fontWeight={700}>
-                    {item.role} · {item.company}
+                  <Typography variant="h5" fontWeight={700}>
+                    {item.role} · <span style={{ color: '#B46A4F' }}>{item.company}</span>
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography 
+                    className="pixel-font" 
+                    variant="subtitle2" 
+                    color="text.secondary"
+                    sx={{ fontSize: { xs: '0.8rem', sm: '0.9rem' } }}
+                  >
                     {item.period}
                   </Typography>
                 </Stack>
-                <Typography variant="body1" color="text.secondary">
+                
+                <Typography 
+                  variant="body1" 
+                  color="text.secondary" 
+                  sx={{ lineHeight: 1.6, fontWeight: 500 }}
+                >
                   {item.summary}
                 </Typography>
+
                 {item.technologies && item.technologies.length > 0 && (
-                  <Stack direction="row" flexWrap="wrap" gap={1}>
+                  <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ pt: 1 }}>
                     {item.technologies.map((tech) => (
-                      <Chip key={tech} label={tech} size="small" variant="outlined" />
+                      <Chip 
+                        key={tech} 
+                        label={tech} 
+                        size="small" 
+                        className="pixel-font"
+                        sx={(theme) => ({
+                          borderRadius: 0,
+                          border: `1.5px solid ${theme.palette.text.primary}`,
+                          fontWeight: 700,
+                          fontSize: '0.75rem',
+                          bgcolor: 'transparent',
+                          px: 0.5,
+                          py: 1.25,
+                        })}
+                      />
                     ))}
                   </Stack>
                 )}
