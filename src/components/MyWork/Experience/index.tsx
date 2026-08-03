@@ -49,10 +49,10 @@ export default function Experience() {
       ref={rootRef} 
       component="section" 
       aria-labelledby="experience-heading" 
-      sx={{ py: { xs: 8, md: 12 } }}
+      sx={{ py: { xs: 6, md: 12 }, px: { xs: 2, sm: 3, md: 0 } }}
     >
       <Container maxWidth="lg">
-        <Stack spacing={1.5} sx={{ mb: 6 }} alignItems="center" textAlign="center">
+        <Stack spacing={1.5} sx={{ mb: { xs: 4, md: 6 } }} alignItems="center" textAlign="center">
           <Typography 
             className="pixel-font"
             id="experience-heading" 
@@ -61,37 +61,37 @@ export default function Experience() {
           >
             [ Professional Journey ]
           </Typography>
-          <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
+          <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "1.75rem", sm: "2rem", md: "2.75rem" } }}>
             Work Experience
           </Typography>
         </Stack>
 
-        <Stack spacing={4}>
+        <Stack spacing={{ xs: 3, md: 4 }}>
           {items.map((item, idx) => (
             <Paper
               key={`${item.company}-${idx}`}
               className="exp-item pixel-card"
               tabIndex={0}
               sx={{
-                p: { xs: 3, md: 4 },
+                p: { xs: 2.5, sm: 3, md: 4 },
                 outline: 'none',
               }}
             >
-              <Stack spacing={2}>
+              <Stack spacing={{ xs: 1.5, md: 2 }}>
                 <Stack
                   direction={{ xs: 'column', sm: 'row' }}
                   justifyContent="space-between"
                   alignItems={{ xs: 'flex-start', sm: 'center' }}
                   spacing={1}
                 >
-                  <Typography variant="h5" fontWeight={700}>
+                  <Typography variant="h5" fontWeight={700} sx={{ fontSize: { xs: '1rem', sm: '1.15rem', md: '1.5rem' }, lineHeight: 1.3 }}>
                     {item.role} · <span style={{ color: '#B46A4F' }}>{item.company}</span>
                   </Typography>
                   <Typography 
                     className="pixel-font" 
                     variant="subtitle2" 
                     color="text.secondary"
-                    sx={{ fontSize: { xs: '0.8rem', sm: '0.9rem' } }}
+                    sx={{ fontSize: { xs: '0.75rem', sm: '0.9rem' }, flexShrink: 0 }}
                   >
                     {item.period}
                   </Typography>
@@ -100,13 +100,13 @@ export default function Experience() {
                 <Typography 
                   variant="body1" 
                   color="text.secondary" 
-                  sx={{ lineHeight: 1.6, fontWeight: 500 }}
+                  sx={{ lineHeight: 1.6, fontWeight: 500, fontSize: { xs: '0.85rem', sm: '0.9rem', md: '1rem' } }}
                 >
                   {item.summary}
                 </Typography>
 
                 {item.technologies && item.technologies.length > 0 && (
-                  <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ pt: 1 }}>
+                  <Stack direction="row" flexWrap="wrap" gap={{ xs: 0.75, sm: 1.25 }} sx={{ pt: 1 }}>
                     {item.technologies.map((tech) => (
                       <Chip 
                         key={tech} 
@@ -117,10 +117,11 @@ export default function Experience() {
                           borderRadius: 0,
                           border: `1.5px solid ${theme.palette.text.primary}`,
                           fontWeight: 700,
-                          fontSize: '0.75rem',
+                          fontSize: { xs: '0.65rem', sm: '0.75rem' },
                           bgcolor: 'transparent',
                           px: 0.5,
-                          py: 1.25,
+                          py: 1,
+                          height: 'auto',
                         })}
                       />
                     ))}

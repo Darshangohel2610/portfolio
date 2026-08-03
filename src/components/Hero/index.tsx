@@ -1,6 +1,5 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useEffect, useState } from "react";
 import { useColorMode } from "../../styles/colorMode";
 
 function PixelCloud1() {
@@ -83,8 +82,9 @@ export default function Hero() {
         background: mode === "light" 
           ? "linear-gradient(to bottom, #AFCBEA 0%, #F6F4EE 100%)"
           : "linear-gradient(to bottom, #0F141C 0%, #1B2230 100%)",
-        pt: { xs: 12, md: 16 },
-        pb: { xs: 8, md: 10 },
+        pt: { xs: 10, md: 16 },
+        pb: { xs: 6, md: 10 },
+        px: { xs: 2, sm: 3, md: 0 },
       }}
     >
       {/* Floating clouds in background */}
@@ -139,18 +139,22 @@ export default function Hero() {
       )}
 
       <Container maxWidth="md" sx={{ position: "relative", zIndex: 2 }}>
-        <Stack spacing={{ xs: 4, sm: 5 }} alignItems="center">
+        <Stack spacing={{ xs: 3, sm: 5 }} alignItems="center">
           {/* Animated Pixel Character Sitting on Cloud */}
           <Box 
             sx={{ 
               animation: "hoverCloud 4s ease-in-out infinite",
-              mb: -2,
+              mb: { xs: -1, sm: -2 },
+              '& svg': {
+                width: { xs: 100, sm: 120, md: 140 },
+                height: { xs: 100, sm: 120, md: 140 },
+              }
             }}
           >
             <PixelCharacter />
           </Box>
 
-          <Stack spacing={{ xs: 2, sm: 2.5 }} alignItems="center">
+          <Stack spacing={{ xs: 1.5, sm: 2.5 }} alignItems="center">
             {/* Small Pixel badge */}
             <Typography
               className="pixel-font"
@@ -160,7 +164,7 @@ export default function Hero() {
                 border: "1px solid currentColor",
                 px: 1.5,
                 py: 0.5,
-                fontSize: { xs: "0.75rem", sm: "0.85rem" },
+                fontSize: { xs: "0.7rem", sm: "0.85rem" },
               })}
             >
               AHMEDABAD, IN
@@ -172,11 +176,12 @@ export default function Hero() {
                 fontWeight: 800,
                 lineHeight: 1.1,
                 fontSize: {
-                  xs: "2.75rem",
-                  sm: "3.75rem",
+                  xs: "2rem",
+                  sm: "3rem",
                   md: "4.5rem",
                 },
                 letterSpacing: "-1px",
+                wordBreak: "break-word",
               }}
             >
               DARSHAN GOHEL
@@ -188,7 +193,7 @@ export default function Hero() {
               sx={(t) => ({
                 fontWeight: 700,
                 color: t.palette.mode === "light" ? "primary.main" : "secondary.main",
-                fontSize: { xs: "1.1rem", sm: "1.4rem", md: "1.6rem" },
+                fontSize: { xs: "1rem", sm: "1.25rem", md: "1.6rem" },
               })}
             >
               React Native Developer
@@ -199,9 +204,10 @@ export default function Hero() {
               color="text.secondary"
               sx={{ 
                 maxWidth: "50ch", 
-                fontSize: { xs: "1rem", sm: "1.15rem" },
+                fontSize: { xs: "0.9rem", sm: "1rem", md: "1.15rem" },
                 lineHeight: 1.6,
                 fontWeight: 500,
+                px: { xs: 1, sm: 0 },
               }}
             >
               Building apps, products, and experiences one pixel at a time.
@@ -211,14 +217,15 @@ export default function Hero() {
           {/* CTA Buttons */}
           <Stack
             direction={{ xs: "column", sm: "row" }}
-            spacing={3}
+            spacing={{ xs: 2, sm: 3 }}
             justifyContent="center"
             alignItems="center"
-            sx={{ width: "100%", pt: 2 }}
+            sx={{ width: "100%", pt: 1 }}
           >
             <Button
               onClick={() => handleScrollTo("#projects")}
               className="pixel-btn pixel-btn-primary"
+              sx={{ width: { xs: '100%', sm: 'auto' }, maxWidth: { xs: 280, sm: 'none' } }}
             >
               View Projects
             </Button>
@@ -226,6 +233,7 @@ export default function Hero() {
             <Button
               onClick={() => handleScrollTo("#contact")}
               className="pixel-btn"
+              sx={{ width: { xs: '100%', sm: 'auto' }, maxWidth: { xs: 280, sm: 'none' } }}
             >
               Contact Me
             </Button>
@@ -241,7 +249,7 @@ export default function Hero() {
           position: "absolute",
           left: 0,
           right: 0,
-          bottom: 24,
+          bottom: { xs: 16, md: 24 },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

@@ -92,10 +92,10 @@ export default function Skills() {
       ref={rootRef} 
       component="section" 
       aria-labelledby="skills-heading" 
-      sx={{ py: { xs: 8, md: 12 } }}
+      sx={{ py: { xs: 6, md: 12 }, px: { xs: 2, sm: 3, md: 0 } }}
     >
       <Container maxWidth="lg">
-        <Stack spacing={1.5} sx={{ mb: 6 }} alignItems="center" textAlign="center">
+        <Stack spacing={1.5} sx={{ mb: { xs: 4, md: 6 } }} alignItems="center" textAlign="center">
           <Typography 
             className="pixel-font"
             id="skills-heading" 
@@ -104,18 +104,18 @@ export default function Skills() {
           >
             [ Toolkit & Proficiencies ]
           </Typography>
-          <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
+          <Typography variant="h3" fontWeight={800} sx={{ fontSize: { xs: "1.75rem", sm: "2rem", md: "2.75rem" } }}>
             Technical Skills
           </Typography>
         </Stack>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, sm: 3 }} justifyContent="center">
           {categories.map((cat, idx) => (
             <Grid key={cat.title} item xs={12} sm={6} md={4}>
               <Paper
                 className="skill-card pixel-card"
                 sx={(theme) => ({
-                  p: 3,
+                  p: { xs: 2, sm: 3 },
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
@@ -134,18 +134,19 @@ export default function Skills() {
                   variant="h5"
                   fontWeight={700}
                   sx={{ 
-                    mb: 2, 
+                    mb: { xs: 1.5, sm: 2 }, 
                     pb: 1, 
                     borderBottom: "2px solid", 
                     borderColor: "text.primary",
                     color: "primary.main",
+                    fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
                   }}
                 >
                   {cat.title}
                 </Typography>
 
                 {/* Skills list */}
-                <Stack direction="row" flexWrap="wrap" gap={1.25} sx={{ mt: 1 }}>
+                <Stack direction="row" flexWrap="wrap" gap={{ xs: 0.75, sm: 1.25 }} sx={{ mt: 1 }}>
                   {cat.skills.map((skill) => (
                     <Chip
                       key={skill}
@@ -156,13 +157,14 @@ export default function Skills() {
                         borderRadius: 0,
                         border: `1.5px solid ${theme.palette.text.primary}`,
                         fontWeight: 600,
-                        fontSize: "0.8rem",
+                        fontSize: { xs: "0.7rem", sm: "0.8rem" },
                         bgcolor: "background.default",
                         px: 0.5,
-                        py: 1.5,
+                        py: { xs: 1, sm: 1.5 },
+                        height: 'auto',
                         "& .MuiChip-icon": {
                           color: "text.primary",
-                          fontSize: "1rem",
+                          fontSize: { xs: "0.85rem", sm: "1rem" },
                           ml: 0.5,
                         }
                       })}
