@@ -196,7 +196,7 @@ export default function Hero() {
                 fontSize: { xs: "1rem", sm: "1.25rem", md: "1.6rem" },
               })}
             >
-              React Native Developer
+              Software Developer
             </Typography>
 
             <Typography
