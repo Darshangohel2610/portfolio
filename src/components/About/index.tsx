@@ -284,10 +284,11 @@ export default function About() {
                     }}
                   >
                     {/* Rotated Diamond Node */}
+                    {/* left = -(paddingLeft + diamondSize/2 - borderWidth/2) to center on the dashed line */}
                     <Box
                       sx={(theme) => ({
                         position: "absolute",
-                        left: { xs: -27, sm: -41 },
+                        left: { xs: -31, sm: -39 },
                         top: 2,
                         width: { xs: 14, sm: 16 },
                         height: { xs: 14, sm: 16 },
